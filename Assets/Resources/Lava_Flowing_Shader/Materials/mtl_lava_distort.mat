@@ -31,7 +31,11 @@ Material:
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 348fa4d278c53ad4dacd07df1e63a248, type: 3}
         m_Scale: {x: 1, y: 1}
+<<<<<<< Updated upstream:Assets/Resources/Lava_Flowing_Shader/Materials/mtl_lava_distort.mat
         m_Offset: {x: 1.4853817, y: 0}
+=======
+        m_Offset: {x: 0.29938808, y: 0}
+>>>>>>> Stashed changes:Assets/Lava_Flowing_Shader/Materials/mtl_lava_distort.mat
     - _MainTex2:
         m_Texture: {fileID: 2800000, guid: bef54341b6d21864c82d47f3bed4c7db, type: 3}
         m_Scale: {x: 1, y: 1}
