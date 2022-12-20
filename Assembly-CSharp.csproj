@@ -58,18 +58,51 @@
   <ItemGroup>
     <Compile Include="Assets/Scripts/MazeRenderer.cs" />
     <Compile Include="Assets/Scripts/MazeGenerator.cs" />
-    <Compile Include="Assets/Cartoon Heroes/Scripts/SetCharacter/SetCharacter.cs" />
-    <Compile Include="Assets/Lava_Flowing_Shader/Scripts/ScrollingUVs_Layers.cs" />
+    <Compile Include="Assets/Resources/Cartoon Heroes/Scripts/SetCharacter/SetCharacter.cs" />
+    <Compile Include="Assets/Resources/Lava_Flowing_Shader/Scripts/ScrollingUVs_Layers.cs" />
     <Compile Include="Assets/Scripts/Player.cs" />
     <Compile Include="Assets/Scripts/Level2.cs" />
+    <Compile Include="Assets/Reversed Interactive/The Portal Collection/Scripts/SimpleCameraControllerPortals.cs" />
+    <Compile Include="Assets/AurynSky/Gems Ultimate Pack/Scripts/AnimationScript.cs" />
+    <Compile Include="Assets/Scripts/PauseMenu.cs" />
+    <Compile Include="Assets/Resources/Robo&apos;s turret/Prefabs/Turret.cs" />
+    <Compile Include="Assets/Scripts/Claire.cs" />
+    <Compile Include="Assets/Resources/FantasyMonstersZolrik/Scene/Script/buttondemo2.cs" />
+    <Compile Include="Assets/Resources/Apple/Prefab/Apple.cs" />
+    <Compile Include="Assets/Scripts/HealthBar.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TerrainSampleAssets/ThirdPartyNotices.txt" />
-    <None Include="Assets/Lava_Flowing_Shader/Shaders/Diffuse_Lava_Distort.shader" />
-    <None Include="Assets/Lava_Flowing_Shader/ReadMe.txt" />
-    <None Include="Assets/Lava_Flowing_Shader/Shaders/Unlit_Lava_Distort_Transparent.shader" />
-    <None Include="Assets/Lava_Flowing_Shader/Shaders/Unlit_Lava_Distort.shader" />
-    <None Include="Assets/Lava_Flowing_Shader/Shaders/Unlit_Lava_Simple.shader" />
+    <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
+    <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets/Resources/Fantasy Forest Environment Free Sample/StandardNoCulling.shader" />
+    <None Include="Assets/TextMesh Pro/Shaders/TMP_Bitmap.shader" />
+    <None Include="Assets/Resources/Lava_Flowing_Shader/Shaders/Diffuse_Lava_Distort.shader" />
+    <None Include="Assets/TextMesh Pro/Shaders/TMPro_Mobile.cginc" />
+    <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF SSD.shader" />
+    <None Include="Assets/AurynSky/Gems Ultimate Pack/READ ME.txt" />
+    <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets/Resources/Lava_Flowing_Shader/ReadMe.txt" />
+    <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Surface.shader" />
+    <None Include="Assets/Resources/Lava_Flowing_Shader/Shaders/Unlit_Lava_Distort_Transparent.shader" />
+    <None Include="Assets/TextMesh Pro/Sprites/EmojiOne Attribution.txt" />
+    <None Include="Assets/TextMesh Pro/Shaders/TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF.shader" />
+    <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile SSD.shader" />
+    <None Include="Assets/TextMesh Pro/Resources/LineBreaking Leading Characters.txt" />
+    <None Include="Assets/TextMesh Pro/Shaders/TMPro_Properties.cginc" />
+    <None Include="Assets/TextMesh Pro/Shaders/TMPro_Surface.cginc" />
+    <None Include="Assets/Resources/Robo&apos;s turret/Shaders/SDR_Structures.shader" />
+    <None Include="Assets/Resources/Lava_Flowing_Shader/Shaders/Unlit_Lava_Distort.shader" />
+    <None Include="Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt" />
+    <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF Overlay.shader" />
+    <None Include="Assets/TextMesh Pro/Shaders/TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt" />
+    <None Include="Assets/Resources/Lava_Flowing_Shader/Shaders/Unlit_Lava_Simple.shader" />
+    <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader" />
+    <None Include="Assets/TerrainSampleAssets/ShaderGraphs/CustomFunctions/CustomLighting.hlsl" />
+    <None Include="Assets/TextMesh Pro/Shaders/TMP_Sprite.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

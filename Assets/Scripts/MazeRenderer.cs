@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MazeRenderer : MonoBehaviour
 {
 
@@ -21,6 +22,9 @@ public class MazeRenderer : MonoBehaviour
 
     [SerializeField]
     private Transform floorPrefab = null;
+
+    [SerializeField]
+    private Transform diamondPrefab = null;
 
     // Start is called before the first frame update
     void Start()
@@ -42,41 +46,60 @@ public class MazeRenderer : MonoBehaviour
                 var cell = maze[i, j];
                 var position = new Vector3(-width / 2 + i, 0, -height / 2 + j);
 
-                if (cell.HasFlag(WallState.UP))
-                {
-                    var topWall = Instantiate(wallPrefab, transform) as Transform;
-                    topWall.position = position + new Vector3(0, 0, size / 2);
-                    topWall.localScale = new Vector3(size, topWall.localScale.y, topWall.localScale.z);
-                }
+                //if (!(cell.HasFlag(WallState.UP)) || !(cell.HasFlag(WallState.LEFT )) || (!(i == width - 1) && !(cell.HasFlag(WallState.RIGHT)))
+                //    || (!(j==0) && !(cell.HasFlag(WallState.DOWN))))
+                //{
+                //    int num = Random.Range(1, 5);
+                //    if (num > 3)
+                //    {
+                //        var diamond = Instantiate(diamondPrefab, transform) as Transform;
+                //        diamond.position = position + new Vector3(0, 0, size / 10);
+                //        diamond.localScale = new Vector3(size, diamond.localScale.y, diamond.localScale.z);
+                //    }
 
-                if (cell.HasFlag(WallState.LEFT))
-                {
-                    var leftWall = Instantiate(wallPrefab, transform) as Transform;
-                    leftWall.position = position + new Vector3(-size / 2, 0, 0);
-                    leftWall.localScale = new Vector3(size, leftWall.localScale.y, leftWall.localScale.z);
-                    leftWall.eulerAngles = new Vector3(0, 90, 0);
-                }
+                //}
 
-                if (i == width - 1)
-                {
-                    if (cell.HasFlag(WallState.RIGHT))
+                //else
+                //{
+                    if (cell.HasFlag(WallState.UP))
                     {
-                        var rightWall = Instantiate(wallPrefab, transform) as Transform;
-                        rightWall.position = position + new Vector3(+size / 2, 0, 0);
-                        rightWall.localScale = new Vector3(size, rightWall.localScale.y, rightWall.localScale.z);
-                        rightWall.eulerAngles = new Vector3(0, 90, 0);
-                    }
-                }
 
-                if (j == 0)
-                {
-                    if (cell.HasFlag(WallState.DOWN))
-                    {
-                        var bottomWall = Instantiate(wallPrefab, transform) as Transform;
-                        bottomWall.position = position + new Vector3(0, 0, -size / 2);
-                        bottomWall.localScale = new Vector3(size, bottomWall.localScale.y, bottomWall.localScale.z);
+
+                        var topWall = Instantiate(wallPrefab, transform) as Transform;
+                        topWall.position = position + new Vector3(0, 0, size / 2);
+                        topWall.localScale = new Vector3(size, topWall.localScale.y, topWall.localScale.z);
                     }
-                }
+
+                    if (cell.HasFlag(WallState.LEFT))
+                    {
+                        var leftWall = Instantiate(wallPrefab, transform) as Transform;
+                        leftWall.position = position + new Vector3(-size / 2, 0, 0);
+                        leftWall.localScale = new Vector3(size, leftWall.localScale.y, leftWall.localScale.z);
+                        leftWall.eulerAngles = new Vector3(0, 90, 0);
+                    }
+
+                    if (i == width - 1)
+                    {
+                        if (cell.HasFlag(WallState.RIGHT))
+                        {
+                            var rightWall = Instantiate(wallPrefab, transform) as Transform;
+                            rightWall.position = position + new Vector3(+size / 2, 0, 0);
+                            rightWall.localScale = new Vector3(size, rightWall.localScale.y, rightWall.localScale.z);
+                            rightWall.eulerAngles = new Vector3(0, 90, 0);
+                        }
+                    }
+
+                    if (j == 0)
+                    {
+                        if (cell.HasFlag(WallState.DOWN))
+                        {
+                            var bottomWall = Instantiate(wallPrefab, transform) as Transform;
+                            bottomWall.position = position + new Vector3(0, 0, -size / 2);
+                            bottomWall.localScale = new Vector3(size, bottomWall.localScale.y, bottomWall.localScale.z);
+                        }
+                    }
+                //}
+
             }
 
         }
@@ -89,4 +112,3 @@ public class MazeRenderer : MonoBehaviour
 
     }
 }
-

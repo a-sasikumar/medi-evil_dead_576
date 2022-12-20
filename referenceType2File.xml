@@ -3,43 +3,43 @@
   <TypeDate>
     <guid>85f86737bdc3f4a78989b311b99ccd7d</guid>
     <fileName>Assets/Plugins/UnitySweeper/Editor/AssetCollector.cs</fileName>
-    <timeStamp>2022-12-13T19:37:40-05:00</timeStamp>
+    <timeStamp>2022-12-19T23:50:59.1251619-05:00</timeStamp>
     <typeFullName />
   </TypeDate>
   <TypeDate>
     <guid>1140a7b9a420e4c2d887505f88ac93fc</guid>
     <fileName>Assets/Plugins/UnitySweeper/Editor/AssetReferenceCollection.cs</fileName>
-    <timeStamp>2022-12-13T19:37:40-05:00</timeStamp>
+    <timeStamp>2022-12-19T23:50:59.1256014-05:00</timeStamp>
     <typeFullName />
   </TypeDate>
   <TypeDate>
     <guid>98be032c9628247e8b9c64f98683c6fe</guid>
     <fileName>Assets/Plugins/UnitySweeper/Editor/ClassReferenceCollection.cs</fileName>
-    <timeStamp>2022-12-13T19:37:40-05:00</timeStamp>
+    <timeStamp>2022-12-19T23:50:59.1259403-05:00</timeStamp>
     <typeFullName />
   </TypeDate>
   <TypeDate>
     <guid>c98c93b8b0c8342999b968f40bc962ce</guid>
     <fileName>Assets/Plugins/UnitySweeper/Editor/CollectionData.cs</fileName>
-    <timeStamp>2022-12-13T19:37:40-05:00</timeStamp>
+    <timeStamp>2022-12-19T23:50:59.1262654-05:00</timeStamp>
     <typeFullName />
   </TypeDate>
   <TypeDate>
     <guid>00a677eb14e50482c99bd678edde70ba</guid>
     <fileName>Assets/Plugins/UnitySweeper/Editor/FindUnusedAssetsWindow.cs</fileName>
-    <timeStamp>2022-12-13T19:37:40-05:00</timeStamp>
+    <timeStamp>2022-12-19T23:50:59.1265936-05:00</timeStamp>
     <typeFullName />
   </TypeDate>
   <TypeDate>
     <guid>0bd30e1ec96f64fbdb7c9b95bd453589</guid>
     <fileName>Assets/Plugins/UnitySweeper/Editor/ShaderReferenceCollection.cs</fileName>
-    <timeStamp>2022-12-13T19:37:40-05:00</timeStamp>
+    <timeStamp>2022-12-19T23:50:59.1270747-05:00</timeStamp>
     <typeFullName />
   </TypeDate>
   <TypeDate>
     <guid>4d9cb937a517a4cfb915f16f8da580ba</guid>
     <fileName>Assets/Scripts/Level2.cs</fileName>
-    <timeStamp>2022-12-17T11:29:11.6448412-05:00</timeStamp>
+    <timeStamp>2022-12-19T23:51:04.1808579-05:00</timeStamp>
     <typeFullName>
       <string>Level2</string>
     </typeFullName>
@@ -48,7 +48,7 @@
   <TypeDate>
     <guid>1b207e6ed802b44fcb4d78ed9ddac08c</guid>
     <fileName>Assets/Scripts/MazeGenerator.cs</fileName>
-    <timeStamp>2022-12-07T21:30:46.3170394-05:00</timeStamp>
+    <timeStamp>2022-12-19T23:51:04.1810932-05:00</timeStamp>
     <typeFullName>
       <string>WallState</string>
       <string>Position</string>
@@ -60,7 +60,7 @@
   <TypeDate>
     <guid>0e25e1d5bf0424f3c898383ba2353bbd</guid>
     <fileName>Assets/Scripts/MazeRenderer.cs</fileName>
-    <timeStamp>2022-12-08T10:37:06.9907762-05:00</timeStamp>
+    <timeStamp>2022-12-19T23:51:18.4898409-05:00</timeStamp>
     <typeFullName>
       <string>MazeRenderer</string>
     </typeFullName>
@@ -69,7 +69,7 @@
   <TypeDate>
     <guid>1aff8fcc5e384441591f98f9fe386b4e</guid>
     <fileName>Assets/Scripts/Player.cs</fileName>
-    <timeStamp>2022-12-08T17:19:22.8657591-05:00</timeStamp>
+    <timeStamp>2022-12-20T08:04:24.9999046-05:00</timeStamp>
     <typeFullName>
       <string>Player</string>
     </typeFullName>
@@ -78,7 +78,7 @@
   <TypeDate>
     <guid>e3d28cb150ad86f4a8100312a4aea7a1</guid>
     <fileName>Assets/Lava_Flowing_Shader/Scripts/ScrollingUVs_Layers.cs</fileName>
-    <timeStamp>2022-12-17T11:29:11.6391477-05:00</timeStamp>
+    <timeStamp>2022-12-19T23:51:01.3864793-05:00</timeStamp>
     <typeFullName>
       <string>ScrollingUVs_Layers</string>
     </typeFullName>
@@ -87,7 +87,7 @@
   <TypeDate>
     <guid>63cbfa81008c7294a85576892c8f674a</guid>
     <fileName>Assets/Cartoon Heroes/Scripts/SetCharacter/SetCharacter.cs</fileName>
-    <timeStamp>2020-01-30T09:48:53-05:00</timeStamp>
+    <timeStamp>2022-12-19T23:51:00.8526845-05:00</timeStamp>
     <typeFullName>
       <string>CartoonHeroes.SetCharacter</string>
       <string>CartoonHeroes.SetCharacter+ItemGroup</string>
@@ -98,7 +98,79 @@
   <TypeDate>
     <guid>fd027a1f114b03f468aea62fef4cf034</guid>
     <fileName>Assets/Cartoon Heroes/Scripts/SetCharacter/Editor/SetCharacterEditor.cs</fileName>
-    <timeStamp>2020-01-30T09:51:13-05:00</timeStamp>
+    <timeStamp>2022-12-19T23:51:00.8525182-05:00</timeStamp>
     <typeFullName />
+  </TypeDate>
+  <TypeDate>
+    <guid>d020d56bab6e84d9ab741915450bb081</guid>
+    <fileName>Assets/Scripts/Claire.cs</fileName>
+    <timeStamp>2022-12-19T23:51:04.1805381-05:00</timeStamp>
+    <typeFullName>
+      <string>Claire</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>ba3eb0d537a6a41d8b404e1590876ae0</guid>
+    <fileName>Assets/Scripts/HealthBar.cs</fileName>
+    <timeStamp>2022-12-20T01:26:19.0596412-05:00</timeStamp>
+    <typeFullName>
+      <string>HealthBar</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>b40de968f3ab94d1f930c93f433ab7bd</guid>
+    <fileName>Assets/Scripts/PauseMenu.cs</fileName>
+    <timeStamp>2022-12-19T23:51:18.4899654-05:00</timeStamp>
+    <typeFullName>
+      <string>PauseMenu</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>9ff967b7ed48f2441bcf509edf6b889a</guid>
+    <fileName>Assets/AurynSky/Gems Ultimate Pack/Scripts/AnimationScript.cs</fileName>
+    <timeStamp>2022-12-19T23:51:15.7426503-05:00</timeStamp>
+    <typeFullName>
+      <string>AnimationScript</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>0953e0be8107fc849a4b8fa2303efbe4</guid>
+    <fileName>Assets/Resources/Apple/Prefab/Apple.cs</fileName>
+    <timeStamp>2022-12-19T23:50:59.1300314-05:00</timeStamp>
+    <typeFullName>
+      <string>Apple</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>4e283884e6f945a428fc7fb0708ccea6</guid>
+    <fileName>Assets/Resources/Robo's turret/Prefabs/Turret.cs</fileName>
+    <timeStamp>2022-12-19T23:51:01.3979398-05:00</timeStamp>
+    <typeFullName>
+      <string>Turret</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>e8a636f62116c0a40bbfefdf876d4608</guid>
+    <fileName>Assets/Reversed Interactive/The Portal Collection/Scripts/SimpleCameraControllerPortals.cs</fileName>
+    <timeStamp>2022-12-19T23:51:16.5992071-05:00</timeStamp>
+    <typeFullName>
+      <string>UnityTemplateProjects.SimpleCameraControllerPortals</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>4c3d9acd7188f4c80b859dd3484fbf5b</guid>
+    <fileName>Assets/Resources/FantasyMonstersZolrik/Scene/Script/buttondemo2.cs</fileName>
+    <timeStamp>2022-12-19T23:51:01.3385155-05:00</timeStamp>
+    <typeFullName>
+      <string>buttondemo2</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
   </TypeDate>
 </ArrayOfTypeDate>

@@ -7,125 +7,124 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField]
+    public Transform spwanPoint;
+
+    public bool spawn;
 
     private Animator animation_controller;
     private CharacterController character_controller;
     public Vector3 movement_direction;
     public float walking_velocity;
-    public Text text;
+    //public Text text;
     public float velocity;
     public int num_lives;
     public bool has_won;
+    public int maxHealth = 5;
+    public int currentHealth;
+
+    public HealthBar healthbar;
     //private GameObject endzone;
+    private float Xorigin;
+    private float Zorigin;
+    private float Height;
 
     // Use this for initialization
     void Start()
     {
         animation_controller = GetComponent<Animator>();
         character_controller = GetComponent<CharacterController>();
-        movement_direction = new Vector3(0.0f, 0.0f, 0.0f);
-        walking_velocity = 1.5f;
+        movement_direction = new Vector3(1f, 0.0f, 1f);
+        walking_velocity = 1.5f; 
         velocity = 0.0f;
         num_lives = 5;
         has_won = false;
+        spawn = false;
+        currentHealth = maxHealth;
+        healthbar.SetMaxHealth(maxHealth);
         //endzone = GameObject.FindWithTag("Finish");
+        //Xorigin = transform.position.x;
+        //Zorigin = transform.position.z;
+        //Height = transform.position.y;
+        //// Asking Height
+        //if (Height < 0)
+        //{
+        //    Height += 3;
+        //}
+        character_controller.transform.position = spwanPoint.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        text.text = "Lives left: " + num_lives;
+        //text.text = "Lives left: " + num_lives;
 
         // Initial State: Idle
-        animation_controller.SetInteger("state", 0);
+
+        // dummy method to check damage and health bar
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            TakeDamage(1);
+        }
+
+        animation_controller.SetInteger("State", 0);
 
         // State: Walk
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            animation_controller.SetInteger("state", 1);
+            animation_controller.SetInteger("State", 1);
             velocity += 0.5f;
 
             if (velocity > walking_velocity)
                 velocity = walking_velocity;
         }
 
-        // State: Run
+        // State: Walk Backwards
         else if (Input.GetKey(KeyCode.DownArrow))
         {
-            animation_controller.SetInteger("state", 2);
-            velocity -= 0.7f;
+            animation_controller.SetInteger("State", 1);
+            velocity -= 0.1f;
 
-            if (velocity > walking_velocity * 2)
-                velocity = walking_velocity * 2;
+            if (velocity > walking_velocity)
+                velocity = walking_velocity;
+        }
+
+        // State: Attack
+        else if (Input.GetKey(KeyCode.A))
+        {
+            animation_controller.SetInteger("State", 2);
+            velocity += 0.7f;
+
+            //if (velocity > walking_velocity * 2)
+            //    velocity = walking_velocity * 2;
         }
 
         // State: Roll
-        else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.S))
         {
-            animation_controller.SetInteger("state", 3);
+            animation_controller.SetInteger("State", 3);
+        }
+
+        // State: Block
+        else if (Input.GetKey(KeyCode.B))
+        {
+            animation_controller.SetInteger("State", 4);
+            velocity = 0;
+        }
+
+        // State: Damage (enemy hit)
+        else if (Input.GetKey(KeyCode.Space))
+        {
+            animation_controller.SetInteger("State", 5);
             velocity += 0.1f;
-
-            if (velocity > walking_velocity / 2)
-                velocity = walking_velocity / 2;
-        }
-
-        // State: CrouchBackwards
-        else if (Input.GetKey(KeyCode.X) && Input.GetKey(KeyCode.Z))
-        {
-            animation_controller.SetInteger("state", 4);
-            velocity -= 0.1f;
-
-            if (Mathf.Abs(velocity) > walking_velocity / 2)
-                velocity = (-1) * walking_velocity / 2;
-        }
-
-        // State: RunForwards + Jump later (if 'Space' is pressed)
-        else if (Input.GetKey(KeyCode.T) && Input.GetKey(KeyCode.R))
-        {
-            animation_controller.SetInteger("state", 5);
-            velocity += 0.7f;
-
-            if (velocity > walking_velocity * 2)
-                velocity = walking_velocity * 2;
-
-            if (Input.GetKey(KeyCode.Space) && character_controller.isGrounded)
-            {
-                animation_controller.SetInteger("state", 6);
-                velocity += 0.7f;
-
-                if (velocity > walking_velocity * 3)
-                    velocity = walking_velocity * 3;
-            }
-
         }
         // Default State: Idle
         else
         {
-            animation_controller.SetInteger("state", 0);
+            animation_controller.SetInteger("State", 0);
             velocity = 0;
         }
 
-
-
-        // you don't need to change the code below (yet, it's better if you understand it). Name your FSM states according to the names below (or change both).
-        // do not delete this. It's useful to shift the capsule (used for collision detection) downwards. 
-        // The capsule is also used from turrets to observe, aim and shoot (see Turret.cs)
-        // If the character is crouching, then she evades detection. 
-        bool is_crouching = false;
-        if ((animation_controller.GetCurrentAnimatorStateInfo(0).IsName("CrouchForward"))
-         || (animation_controller.GetCurrentAnimatorStateInfo(0).IsName("CrouchBackward")))
-        {
-            is_crouching = true;
-        }
-
-        if (is_crouching)
-        {
-            GetComponent<CapsuleCollider>().center = new Vector3(GetComponent<CapsuleCollider>().center.x, 0.0f, GetComponent<CapsuleCollider>().center.z);
-        }
-        else
-        {
-            GetComponent<CapsuleCollider>().center = new Vector3(GetComponent<CapsuleCollider>().center.x, 0.9f, GetComponent<CapsuleCollider>().center.z);
-        }
 
         // Rotation and orientation
         if (Input.GetKey(KeyCode.LeftArrow))
@@ -145,7 +144,12 @@ public class Player : MonoBehaviour
         // character controller's move function is useful to prevent the character passing through the terrain
         // (changing transform's position does not make these checks)
 
-        if (transform.position.y > 0.0f) // if the character starts "climbing" the terrain, drop her down
+        //if (transform.position.y < 0)
+        //{
+        //    transform.position = new Vector3(xdirection, Height, zdirection);
+        //}
+
+        if (character_controller.transform.position.y > 0.0f) // if the character starts "climbing" the terrain, drop him down
         {
             Vector3 lower_character = movement_direction * velocity * Time.deltaTime;
             lower_character.y = -100f; // hack to force her down
@@ -158,7 +162,7 @@ public class Player : MonoBehaviour
 
         if (num_lives < 1)
         {
-            text.text = "YOU DIED!";
+            //text.text = "YOU DIED!";
             animation_controller.SetTrigger("isDead");
             velocity = 0;
             StartCoroutine(Lost());
@@ -172,6 +176,12 @@ public class Player : MonoBehaviour
         //    velocity = 0;
         //    StartCoroutine(Won());
         //}
+    }
+
+    void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        healthbar.SetHealth(currentHealth);
     }
 
     IEnumerator Lost()
