@@ -14,7 +14,12 @@ public class Player : MonoBehaviour {
     public float velocity;
     public int num_lives;
     public bool has_won;
-    
+
+    public int maxHealth = 5;
+    public int currentHealth;
+
+    public HealthBar healthbar;
+
     public bool is_dead;
     public GameObject death_text_object;
     public GameObject restart_button;
@@ -41,6 +46,8 @@ public class Player : MonoBehaviour {
 
         respawnPoint.transform.position = new Vector3(0, 0, 0);
         character_controller.transform.position = respawnPoint.transform.position;
+        currentHealth = maxHealth;
+        healthbar.SetMaxHealth(maxHealth);
         // death_text_object = GameObject.Find("GameOver");
         // restart_button = GameObject.Find("Restart");
         // success_text = GameObject.Find("Victory");
@@ -62,8 +69,8 @@ public class Player : MonoBehaviour {
         // (d) check if the character reached the target (display the message "you won", freeze the character (idle state), provide an option to restart the game
         // feel free to add more fields in the class        
         ////////////////////////////////////////////////
-        bool isRolling = animation_controller.GetCurrentAnimatorStateInfo(0).IsName("Roll");
-        if(!isRolling) {
+        bool isJumping = animation_controller.GetCurrentAnimatorStateInfo(0).IsName("Jump") || animation_controller.GetCurrentAnimatorStateInfo(0).IsName("Land");
+        if(!isJumping) {
             if (Input.GetKey(KeyCode.UpArrow)) {
                 animation_controller.SetBool("isIdle", false);   
                 animation_controller.SetBool("isWalking", true);
@@ -78,21 +85,21 @@ public class Player : MonoBehaviour {
                 animation_controller.SetBool("isAttacking", false);  
                 velocity = 0.0f;
             }
-            if (Input.GetKey(KeyCode.LeftArrow) && !isRolling) {
+            if (Input.GetKey(KeyCode.LeftArrow) && !isJumping) {
                 transform.Rotate(new Vector3(0.0f,-0.5f,0.0f));
-            } else if (Input.GetKey(KeyCode.RightArrow) && !isRolling) {
+            } else if (Input.GetKey(KeyCode.RightArrow) && !isJumping) {
                 transform.Rotate(new Vector3(0.0f,0.5f,0.0f)); 
             }
-            if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && !isRolling) {
+            if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && !isJumping) {
                 animation_controller.SetBool("isAttacking", true);
             }
-            if ((Input.GetKey(KeyCode.Space)) && !isRolling) {
-                animation_controller.SetBool("isRolling", true);
+            if ((Input.GetKey(KeyCode.Space)) && !isJumping) {
+                animation_controller.SetBool("isJumping", true);
             }
         }
-        if (isRolling) {
-            animation_controller.SetBool("isRolling", false);
-            velocity += 0.45f;
+        if (isJumping) {
+            animation_controller.SetBool("isJumping", false);
+            velocity += 0.7f;
             velocity = Mathf.Min(velocity, 3*walking_velocity);
         }
 
@@ -160,6 +167,12 @@ public class Player : MonoBehaviour {
             character_controller.Move(movement_direction * velocity * Time.deltaTime);
         }
     }   
+
+    void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        healthbar.SetHealth(currentHealth);
+    }
 
     public void Restart()
     {

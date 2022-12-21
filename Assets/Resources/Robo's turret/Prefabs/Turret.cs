@@ -6,11 +6,11 @@ public class Turret : MonoBehaviour
 {
     private float shooting_delay; 
     private GameObject projectile_template;
-    private Vector3 direction_from_turret_to_claire;
+    private Vector3 direction_from_turret_to_player;
     private Vector3 shooting_direction;
     private Vector3 projectile_starting_pos;
     private float projectile_velocity;
-    private bool claire_is_accessible;
+    private bool player_is_accessible;
     public float EPSILON = 1.0f;
 
     // Start is called before the first frame update
@@ -21,41 +21,41 @@ public class Turret : MonoBehaviour
             Debug.LogError("Error: could not find the apple prefab in the project! Did you delete/move the prefab from your project?");
         shooting_delay = 0.5f;  
         projectile_velocity = 5.0f;
-        direction_from_turret_to_claire = new Vector3(0.0f, 0.0f, 0.0f);
+        direction_from_turret_to_player = new Vector3(0.0f, 0.0f, 0.0f);
         projectile_starting_pos = new Vector3(0.0f, 0.0f, 0.0f);
-        claire_is_accessible = false;
+        player_is_accessible = false;
         StartCoroutine("Spawn");
     }
 
     // Update is called once per frame
     void Update()
     {
-        GameObject claire = GameObject.Find("Claire");
-        if (claire == null)
-            Debug.LogError("Error: could not find the game character 'Claire' in the scene. Did you delete the model Claire from your scene?");
-        Vector3 claire_centroid = claire.GetComponent<CapsuleCollider>().bounds.center;
+        GameObject player = GameObject.Find("Player");
+        if (player == null)
+            Debug.LogError("Error: could not find the Player in the scene. Did you delete the model Player from your scene?");
+        Vector3 player_centroid = player.GetComponent<CapsuleCollider>().bounds.center;
         Vector3 turret_centroid = GetComponent<Collider>().bounds.center;
-        direction_from_turret_to_claire = claire_centroid - turret_centroid;
-        direction_from_turret_to_claire.Normalize();
+        direction_from_turret_to_player = player_centroid - turret_centroid;
+        direction_from_turret_to_player.Normalize();
 
         RaycastHit hit;
-        if (Physics.Raycast( turret_centroid, direction_from_turret_to_claire, out hit, Mathf.Infinity))
+        if (Physics.Raycast( turret_centroid, direction_from_turret_to_player, out hit, Mathf.Infinity))
         {
-            if (hit.collider.gameObject == claire)
+            if (hit.collider.gameObject == player)
             {
                 ////////////////////////////////////////////////
                 // WRITE CODE HERE:
                 // implement deflection shooting
-                // shooting_direction = direction_from_turret_to_claire; // this is a very simple heuristic for shooting, replace it
+                // shooting_direction = direction_from_turret_to_player; // this is a very simple heuristic for shooting, replace it
                 float delta_pos = 10.0f;
-                Vector3 future_target_pos = claire_centroid;
+                Vector3 future_target_pos = player_centroid;
                 while(delta_pos > EPSILON) {
                     float dist = (float)Vector3.Distance(future_target_pos, turret_centroid);
                     float lookahead_time = dist / projectile_velocity;
                     Vector3 last_future_target_pos = future_target_pos;
-                    Claire c = (Claire)claire.GetComponent<Claire>();
+                    Player c = (Player)player.GetComponent<Player>();
                     Vector3 target_velocity = c.movement_direction*c.velocity;
-                    future_target_pos = claire_centroid + lookahead_time * target_velocity;
+                    future_target_pos = player_centroid + lookahead_time * target_velocity;
                     delta_pos = Vector3.Distance(future_target_pos, last_future_target_pos);
                 }
                 shooting_direction = future_target_pos - turret_centroid;
@@ -66,10 +66,10 @@ public class Turret : MonoBehaviour
                 transform.eulerAngles = new Vector3(0.0f, angle_to_rotate_turret, 0.0f);
                 Vector3 current_turret_direction = new Vector3(Mathf.Sin(Mathf.Deg2Rad * transform.eulerAngles.y), 1.1f, Mathf.Cos(Mathf.Deg2Rad * transform.eulerAngles.y));
                 projectile_starting_pos = transform.position + 1.1f * current_turret_direction;  // estimated position of the turret's front of the cannon
-                claire_is_accessible = true;
+                player_is_accessible = true;
             }
             else
-                claire_is_accessible = false;            
+                player_is_accessible = false;            
         }
     }
 
@@ -77,7 +77,7 @@ public class Turret : MonoBehaviour
     {
         while (true)
         {            
-            if (claire_is_accessible)
+            if (player_is_accessible)
             {
                 GameObject new_object = Instantiate(projectile_template, projectile_starting_pos, Quaternion.identity);
                 new_object.GetComponent<Apple>().direction = shooting_direction;
