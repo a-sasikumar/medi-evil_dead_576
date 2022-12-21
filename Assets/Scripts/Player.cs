@@ -15,7 +15,7 @@ public class Player : MonoBehaviour {
     public int num_lives;
     public bool has_won;
 
-    public int maxHealth = 100;
+    public int maxHealth;
     public int currentHealth;
 
     public HealthBar healthbar;
@@ -44,9 +44,9 @@ public class Player : MonoBehaviour {
         is_dead = false;
         has_lost = false;
 
-        // respawnPoint.transform.position = new Vector3(0, 0, 0);
-        // character_controller.transform.position = respawnPoint.transform.position;
-        currentHealth = maxHealth;
+        respawnPoint.transform.position = new Vector3(0, 0, 0);
+        character_controller.transform.position = respawnPoint.transform.position;
+
         healthbar.SetMaxHealth(maxHealth);
         // death_text_object = GameObject.Find("GameOver");
         // restart_button = GameObject.Find("Restart");
@@ -69,6 +69,16 @@ public class Player : MonoBehaviour {
         // (d) check if the character reached the target (display the message "you won", freeze the character (idle state), provide an option to restart the game
         // feel free to add more fields in the class        
         ////////////////////////////////////////////////
+
+        // player dies
+        if (currentHealth <= 0) {
+            is_dead = true;
+            animation_controller.SetBool("walk", false); 
+            animation_controller.SetBool("attack", false); 
+            animation_controller.SetTrigger("dead");
+            Destroy(gameObject, 3);
+        }
+
         bool isJumping = animation_controller.GetCurrentAnimatorStateInfo(0).IsName("Jump");
         if(!isJumping) {
             if (Input.GetKey(KeyCode.UpArrow)) {
