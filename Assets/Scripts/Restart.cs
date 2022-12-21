@@ -14,6 +14,6 @@ public class Restart : MonoBehaviour
         fps_player_obj = GameObject.Find("Player").GetComponent<Player>();
         animation_controller = fps_player_obj.GetComponent<Animator>();
         animation_controller.SetTrigger("restart");
-    	SceneManager.LoadScene("level1");
+    	SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

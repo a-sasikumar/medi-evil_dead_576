@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
 
         
 
-        maxHealth = 5;
+        maxHealth = 20;
         currentHealth = maxHealth;
 
         healthbar.SetMaxHealth(maxHealth);
@@ -81,16 +81,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // text.text = "Lives left: " + num_lives;
-
-        ////////////////////////////////////////////////
-        // WRITE CODE HERE:
-        // (a) control the animation controller (animator) based on the keyboard input. Adjust also its velocity and moving direction. 
-        // (b) orient (i.e., rotate) your character with left/right arrow [do not change the character's orientation while jumping]
-        // (c) check if the character is out of lives, call the "death" state, let the animation play, and restart the game
-        // (d) check if the character reached the target (display the message "you won", freeze the character (idle state), provide an option to restart the game
-        // feel free to add more fields in the class        
-        ////////////////////////////////////////////////
 
         bool isJumping = animation_controller.GetCurrentAnimatorStateInfo(0).IsName("Jump");
         if (!isJumping)
@@ -163,44 +153,7 @@ public class Player : MonoBehaviour
 
             death_text_object.SetActive(true);
             restart_button.SetActive(true);
-            
-
-
-        if (is_dead && transform.position.y < -5) {
-                Destroy(gameObject);
-        }
-        }
-
-        }
-
-        // TBD
-        if (has_won)
-        {
-            animation_controller.SetBool("isIdle", true);
-            animation_controller.SetBool("isWalking", false);
-            animation_controller.SetBool("isBackWalking", false);
-            animation_controller.SetBool("isCrouchForward", false);
-            animation_controller.SetBool("isCrouchBackward", false);
-            velocity = 0.0f;
-            hasPlayed = false;
-            if (!source.isPlaying && hasPlayed == false)
-            {
-                source.PlayOneShot(nextLevel);
-                hasPlayed = true;
-            }
-            Destroy(gameObject, 3);
-            restart_button.SetActive(true);
-            success_text.SetActive(true);
-        }
-
-
-        // Show menu after animation has run completely
-        if (animation_controller.GetCurrentAnimatorStateInfo(0).IsName("Death") &&
-            animation_controller.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9 && !has_lost)
-        {
-            has_lost = true;
-            restart_button.SetActive(true);
-            death_text_object.SetActive(true);
+        
         }
 
         float xdirection = Mathf.Sin(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
@@ -216,18 +169,8 @@ public class Player : MonoBehaviour
         }
         movement_direction = new Vector3(xdirection, ydirection, zdirection);
 
-        // character controller's move function is useful to prevent the character passing through the terrain
-        // (changing transform's position does not make these checks)
-        // if (transform.position.y > 0.0f) // if the character starts "climbing" the terrain, drop her down
-        // {
-        //     Vector3 lower_character = movement_direction * velocity * Time.deltaTime;
-        //     lower_character.y = -100f; // hack to force her down
-        //     character_controller.Move(lower_character);
-        // }
-        // else
-        // {
+        
         character_controller.Move(movement_direction * velocity * Time.deltaTime);
-        // }
     }
 
     void TakeDamage(int damage)

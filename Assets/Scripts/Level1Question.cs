@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-using Doublsb.Dialog;
 using UnityEngine.SceneManagement;
+using Doublsb.Dialog;
 
-public class Level2Question : MonoBehaviour
+public class Level1Question : MonoBehaviour
 {
 
     public DialogManager dialogManager;
@@ -15,22 +14,22 @@ public class Level2Question : MonoBehaviour
         var dialogTexts = new List<DialogData>();
         var Start = new DialogData("Answer my questions 2. If you answer wrong, you need to try again.");
         dialogTexts.Add(Start);
-        var Text1 = new DialogData("What melts to become lava?", "Li");
-        Text1.SelectList.Add("Correct", "Rocks");
-        Text1.SelectList.Add("Wrong", "Ice");
-        Text1.SelectList.Add("What", "Fire");
+        var Text1 = new DialogData("Which is the biggest rainforest in the world?", "Li");
+        Text1.SelectList.Add("Correct", "Amazon Rainforest");
+        Text1.SelectList.Add("Wrong", "Congo Rainforest");
+        Text1.SelectList.Add("What", "Daintree Rainforest");
         Text1.Callback = () => check_correct();
         dialogTexts.Add(Text1);
 
-       var q2 = new DialogData ("Now, how hot are volcanoes to be able to make lava?");
-        q2.SelectList.Add("Too Hot", "1200000C");
-        q2.SelectList.Add("Correct", "1200C");
-        q2.SelectList.Add("Cold", "120C");
+       var q2 = new DialogData ("Now, how old do you think the oldest tree on the planet is?");
+        q2.SelectList.Add("Correct", "4853 years");
+        q2.SelectList.Add("Too old!", "11786 years");
+        q2.SelectList.Add("Nope", "135 years");
         q2.Callback = () => check_correct2();
         dialogTexts.Add(q2);
         dialogManager.Show(dialogTexts);
 
-        // TODO load success scene
+        
     }
 
     private void check_correct() {
@@ -42,7 +41,7 @@ public class Level2Question : MonoBehaviour
            var dialogTexts = new List<DialogData>();
            dialogTexts.Add (new DialogData ("Unfortunately you need to try again."));
            dialogManager.Show(dialogTexts);
-           SceneManager.LoadScene("EndScene");
+           SceneManager.LoadScene("level1");
         }
     }
 
@@ -51,14 +50,14 @@ public class Level2Question : MonoBehaviour
            var dialogTexts = new List<DialogData>();
            dialogTexts.Add(new DialogData ("Congratulations."));
            dialogManager.Show(dialogTexts);
+           SceneManager.LoadScene("Level2Inst");
         } else {
            var dialogTexts = new List<DialogData>();
            dialogTexts.Add (new DialogData ("Unfortunately you need to try again."));
            dialogManager.Show(dialogTexts);
-           SceneManager.LoadScene("Level2");
+           SceneManager.LoadScene("level1");
         }
     }
-
 
     // Update is called once per frame
     void Update()

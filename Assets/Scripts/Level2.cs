@@ -6,7 +6,7 @@ public class Level2 : MonoBehaviour
 {
 
     public GameObject platform_prefab;
-    float destroyPercent = 0.3f;
+    float destroyPercent = 0.2f;
     public int length = 59;
     public int width = 3;
 
@@ -48,7 +48,6 @@ public class Level2 : MonoBehaviour
         {
             Player p = collision.gameObject.GetComponent<Player>();
             p.currentHealth = 0;
-            GetComponent<MeshCollider>().enabled = false;
         }
     }
 }

@@ -505,7 +505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cb1a391709d54b03bd75c015366d70d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level_to_go_to: Level1Inst
+  level_to_go_to: level1
 --- !u!1 &1515312087
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,7 +577,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: MEDI-EVIL DEAD
+  m_Text: LEVEL 1
 --- !u!222 &1515312090
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -751,10 +751,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "The Kingdom has fallen and you're our only hope! Save the day by finding
-    the right path, fighting the evil monsters with your sword and collecting gems
-    for health. \n\nCONTROLS: Use 'up' to walk, 'right' & 'left' keys to navigate,
-    'Space' to jump, and 'Control' to attack the monsters."
+  m_Text: "You need to sneak in through the forest! Avoid Lava Balls and fight the
+    Trolls to reach the castle in time. \n\nRemember, follow the orange glow stones!\n\nCONTROLS:
+    Use 'up' to walk, 'right' & 'left' keys to navigate, 'Space' to jump, and 'Control'
+    to attack the monsters."
 --- !u!222 &1705464068
 CanvasRenderer:
   m_ObjectHideFlags: 0
