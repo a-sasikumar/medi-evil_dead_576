@@ -26,8 +26,8 @@ public class Player : MonoBehaviour {
     public GameObject success_text;
     public bool has_lost;
 
-    [SerializeField]
-    public Transform respawnPoint;
+    // [SerializeField]
+    // public Transform respawnPoint;
 
     public bool hasPlayed;
     public AudioClip enemyHurt;
@@ -58,11 +58,8 @@ public class Player : MonoBehaviour {
         is_dead = false;
         has_lost = false;
 
-        respawnPoint.transform.position = new Vector3(0, 0, 0);
-        character_controller.transform.position = respawnPoint.transform.position;
-
-        // maxHealth = 5;
-        // currentHealth = maxHealth;
+        maxHealth = 5;
+        currentHealth = maxHealth;
 
         healthbar.SetMaxHealth(maxHealth);
         hasPlayed = false;
@@ -72,6 +69,9 @@ public class Player : MonoBehaviour {
         // death_text_object.SetActive(false);
         // restart_button.SetActive(false);
         // success_text.SetActive(false);
+        
+        // respawnPoint.transform.position = new Vector3(0, 0, 0);
+        // character_controller.transform.position = respawnPoint.transform.position;
     }
 
     // Update is called once per frame
@@ -105,9 +105,9 @@ public class Player : MonoBehaviour {
                 velocity = 0.0f;
             }
             if (Input.GetKey(KeyCode.LeftArrow) && !isJumping) {
-                transform.Rotate(new Vector3(0.0f,-1f,0.0f));
+                transform.Rotate(new Vector3(0.0f,-0.5f,0.0f));
             } else if (Input.GetKey(KeyCode.RightArrow) && !isJumping) {
-                transform.Rotate(new Vector3(0.0f,1f,0.0f)); 
+                transform.Rotate(new Vector3(0.0f,0.5f,0.0f)); 
             }
             if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && !isJumping) {
                 animation_controller.SetBool("isAttacking", true);
