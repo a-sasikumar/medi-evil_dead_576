@@ -71,6 +71,7 @@
     <Compile Include="Assets/Scripts/Level2.cs" />
     <Compile Include="Assets/Scripts/Monster.cs" />
     <Compile Include="Assets/Scripts/ButtonManager.cs" />
+    <Compile Include="Assets/Resources/SimpleCollectiblesPack/SimpleCollectibleScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/Resources/SineVFX/PostProcessingV2/Shaders/StdLib.hlsl" />

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-
+using System.Linq;
 
 public class MazeRenderer : MonoBehaviour
 {
@@ -24,15 +24,38 @@ public class MazeRenderer : MonoBehaviour
     [SerializeField]
     private Transform floorPrefab = null;
 
-    [SerializeField]
-    private Transform diamondPrefab = null;
+    //[SerializeField]
+    //private Transform skeletonPrefab = null;
 
     [SerializeField]
-    private Transform skeletonPrefab = null;
+    private Transform blueGemPrefab = null;
+
+    [SerializeField]
+    private Transform goldBarPrefab = null;
+
+    [SerializeField]
+    private Transform silverCoinPrefab = null;
+
+    [SerializeField]
+    private Transform greenHealthPlusPrefab = null;
+
+    [SerializeField]
+    private Transform goldKeyPrefab = null;
+
+    [SerializeField]
+    private Transform swordPrefab = null;
+
+    [SerializeField]
+    private Transform shieldPrefab = null;
+
+    public int[,] validLocs = new int[10,10];
+    Dictionary<int, int> validLoc = new Dictionary<int, int>();
 
     // Start is called before the first frame update
     void Start()
     {
+        int count = 0;
+        
         var maze = MazeGenerator.Generate(width, height);
         int num_gems = 10;
         int num_enemies = 5;
@@ -96,17 +119,76 @@ public class MazeRenderer : MonoBehaviour
 
                 else
                 {
-                    int num = Random.Range(1, 6);
-                    if (num >= 3)
-                    {
-                        var skeleton = Instantiate(skeletonPrefab, transform) as Transform;
-                        skeleton.position = position + new Vector3(0, 0, size / 10);
-                        skeleton.localScale = new Vector3(size, skeleton.localScale.y, skeleton.localScale.z);
-                    }
+                    validLoc.Add(i, j);
+                    //validLoc.Append(i, j);
+                    
+                    //int num = Random.Range(1, 6);
+                    //if (num >= 3)
+                    //{
+                    //    var skeleton = Instantiate(skeletonPrefab, transform) as Transform;
+                    //    skeleton.position = position + new Vector3(0, 0, size / 10);
+                    //    skeleton.localScale = new Vector3(size, skeleton.localScale.y, skeleton.localScale.z);
+                    //}
                 }
 
             }
         }
+
+        foreach (KeyValuePair<int, int> kvp in validLoc)
+        {
+
+        }
+        
+        System.Random random = new System.Random();
+        int index = random.Next(validLoc.Count);
+        KeyValuePair<int, int> pair = validLoc.ElementAt(index);
+        var validPosition = new Vector3(-width / 2 + pair.Key, 0, -height / 2 + pair.Value);
+        var blueGemPrefab = Instantiate(wallPrefab, transform) as Transform;
+        blueGemPrefab.position = validPosition + new Vector3(0, 0, -size / 2);
+        blueGemPrefab.localScale = new Vector3(size, blueGemPrefab.localScale.y, blueGemPrefab.localScale.z);
+
+        index = random.Next(validLoc.Count);
+        KeyValuePair<int, int> pair1 = validLoc.ElementAt(index);
+        validPosition = new Vector3(-width / 2 + pair1.Key, 0, -height / 2 + pair1.Value);
+        goldBarPrefab = Instantiate(wallPrefab, transform) as Transform;
+        goldBarPrefab.position = validPosition + new Vector3(0, 0, -size / 2);
+        goldBarPrefab.localScale = new Vector3(size, goldBarPrefab.localScale.y, goldBarPrefab.localScale.z);
+
+        index = random.Next(validLoc.Count);
+        KeyValuePair<int, int> pair2 = validLoc.ElementAt(index);
+        validPosition = new Vector3(-width / 2 + pair2.Key, 0, -height / 2 + pair2.Value);
+        silverCoinPrefab = Instantiate(wallPrefab, transform) as Transform;
+        silverCoinPrefab.position = validPosition + new Vector3(0, 0, -size / 2);
+        silverCoinPrefab.localScale = new Vector3(size, silverCoinPrefab.localScale.y, silverCoinPrefab.localScale.z);
+
+        index = random.Next(validLoc.Count);
+        KeyValuePair<int, int> pair3 = validLoc.ElementAt(index);
+        validPosition = new Vector3(-width / 2 + pair3.Key, 0, -height / 2 + pair3.Value);
+        greenHealthPlusPrefab = Instantiate(wallPrefab, transform) as Transform;
+        greenHealthPlusPrefab.position = validPosition + new Vector3(0, 0, -size / 2);
+        greenHealthPlusPrefab.localScale = new Vector3(size, greenHealthPlusPrefab.localScale.y, greenHealthPlusPrefab.localScale.z);
+
+        index = random.Next(validLoc.Count);
+        KeyValuePair<int, int> pair4 = validLoc.ElementAt(index);
+        validPosition = new Vector3(-width / 2 + pair4.Key, 0, -height / 2 + pair4.Value);
+        goldKeyPrefab = Instantiate(wallPrefab, transform) as Transform;
+        goldKeyPrefab.position = validPosition + new Vector3(0, 0, -size / 2);
+        goldKeyPrefab.localScale = new Vector3(size, goldKeyPrefab.localScale.y, goldKeyPrefab.localScale.z);
+
+
+        index = random.Next(validLoc.Count);
+        KeyValuePair<int, int> pair5 = validLoc.ElementAt(index);
+        validPosition = new Vector3(-width / 2 + pair5.Key, 0, -height / 2 + pair5.Value);
+        swordPrefab = Instantiate(wallPrefab, transform) as Transform;
+        swordPrefab.position = validPosition + new Vector3(0, 0, -size / 2);
+        swordPrefab.localScale = new Vector3(size, swordPrefab.localScale.y, swordPrefab.localScale.z);
+
+        index = random.Next(validLoc.Count);
+        KeyValuePair<int, int> pair6 = validLoc.ElementAt(index);
+        validPosition = new Vector3(-width / 2 + pair6.Key, 0, -height / 2 + pair6.Value);
+        shieldPrefab = Instantiate(wallPrefab, transform) as Transform;
+        shieldPrefab.position = validPosition + new Vector3(0, 0, -size / 2);
+        shieldPrefab.localScale = new Vector3(size, shieldPrefab.localScale.y, shieldPrefab.localScale.z);
 
     }
 
