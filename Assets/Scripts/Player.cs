@@ -69,7 +69,7 @@ public class Player : MonoBehaviour {
         // death_text_object.SetActive(false);
         // restart_button.SetActive(false);
         // success_text.SetActive(false);
-        
+
         // respawnPoint.transform.position = new Vector3(0, 0, 0);
         // character_controller.transform.position = respawnPoint.transform.position;
     }
@@ -145,8 +145,12 @@ public class Player : MonoBehaviour {
                 source.PlayOneShot(playerHurt);
                 hasPlayed = true;
             }
-            
+
         } 
+
+        if (is_dead && transform.position.y < -5) {
+                Destroy(gameObject);
+        }
 
 // TBD
         if (has_won) {

@@ -14,7 +14,6 @@ public class Level2 : MonoBehaviour
     void Start()
     {
         GenerateTiles();
-        Debug.Log(name);
     }
 
     void GenerateTiles() {
@@ -47,9 +46,9 @@ public class Level2 : MonoBehaviour
     {   
         if (collision.gameObject.name == "Player")
         {
-            Debug.Log("ENTER " + collision.gameObject.name);
             Player p = collision.gameObject.GetComponent<Player>();
             p.currentHealth = 0;
+            GetComponent<MeshCollider>().enabled = false;
         }
     }
 }
