@@ -69,7 +69,7 @@ public class Player : MonoBehaviour {
         // (d) check if the character reached the target (display the message "you won", freeze the character (idle state), provide an option to restart the game
         // feel free to add more fields in the class        
         ////////////////////////////////////////////////
-        bool isJumping = animation_controller.GetCurrentAnimatorStateInfo(0).IsName("Jump") || animation_controller.GetCurrentAnimatorStateInfo(0).IsName("Land");
+        bool isJumping = animation_controller.GetCurrentAnimatorStateInfo(0).IsName("Jump");
         if(!isJumping) {
             if (Input.GetKey(KeyCode.UpArrow)) {
                 animation_controller.SetBool("isIdle", false);   
@@ -100,7 +100,7 @@ public class Player : MonoBehaviour {
         if (isJumping) {
             animation_controller.SetBool("isJumping", false);
             velocity += 0.7f;
-            velocity = Mathf.Min(velocity, 3*walking_velocity);
+            velocity = Mathf.Min(velocity, 3f*walking_velocity);
         }
 
         if (num_lives <=0 && !is_dead && !has_won) {
@@ -129,43 +129,28 @@ public class Player : MonoBehaviour {
             death_text_object.SetActive(true);
         }
 
-        // you don't need to change the code below (yet, it's better if you understand it). Name your FSM states according to the names below (or change both).
-        // do not delete this. It's useful to shift the capsule (used for collision detection) downwards. 
-        // The capsule is also used from turrets to observe, aim and shoot (see Turret.cs)
-        // If the character is crouching, then she evades detection. 
-        bool is_crouching = false;
-        if ( (animation_controller.GetCurrentAnimatorStateInfo(0).IsName("CrouchForward"))
-         ||  (animation_controller.GetCurrentAnimatorStateInfo(0).IsName("CrouchBackward")) )
-        {
-            is_crouching = true;
-        }
-
-        if (is_crouching)
-        {
-            GetComponent<CapsuleCollider>().center = new Vector3(GetComponent<CapsuleCollider>().center.x, 0.0f, GetComponent<CapsuleCollider>().center.z);
-        }
-        else
-        {
-            GetComponent<CapsuleCollider>().center = new Vector3(GetComponent<CapsuleCollider>().center.x, 0.9f, GetComponent<CapsuleCollider>().center.z);
-        }
-
-        // you will use the movement direction and velocity in Turret.cs for deflection shooting 
         float xdirection = Mathf.Sin(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
         float zdirection = Mathf.Cos(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
-        movement_direction = new Vector3(xdirection, 0.0f, zdirection);
+        float ydirection;
+        if(isJumping) {
+            ydirection = 0.7f;
+        } else {
+            ydirection = 0.0f;
+        }
+        movement_direction = new Vector3(xdirection, ydirection, zdirection);
 
         // character controller's move function is useful to prevent the character passing through the terrain
         // (changing transform's position does not make these checks)
-        if (transform.position.y > 0.0f) // if the character starts "climbing" the terrain, drop her down
-        {
-            Vector3 lower_character = movement_direction * velocity * Time.deltaTime;
-            lower_character.y = -100f; // hack to force her down
-            character_controller.Move(lower_character);
-        }
-        else
-        {
-            character_controller.Move(movement_direction * velocity * Time.deltaTime);
-        }
+        // if (transform.position.y > 0.0f) // if the character starts "climbing" the terrain, drop her down
+        // {
+        //     Vector3 lower_character = movement_direction * velocity * Time.deltaTime;
+        //     lower_character.y = -100f; // hack to force her down
+        //     character_controller.Move(lower_character);
+        // }
+        // else
+        // {
+        character_controller.Move(movement_direction * velocity * Time.deltaTime);
+        // }
     }   
 
     void TakeDamage(int damage)
