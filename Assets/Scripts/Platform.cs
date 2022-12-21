@@ -19,7 +19,7 @@ public class Platform : MonoBehaviour
         speed = Random.Range(0.09f, 0.11f);
         sinking = false;
         sinkStart = 0f;
-        if (!name.StartsWith("platform0") && !name.StartsWith("platform59")) {
+        if (!name.StartsWith("platform0") && !name.StartsWith("platform58")) {
             shouldSink = true;
         } else {
             shouldSink = false;
