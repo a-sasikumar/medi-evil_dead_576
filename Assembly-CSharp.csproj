@@ -72,6 +72,7 @@
     <Compile Include="Assets/Scripts/Monster.cs" />
     <Compile Include="Assets/Scripts/ButtonManager.cs" />
     <Compile Include="Assets/Resources/SimpleCollectiblesPack/SimpleCollectibleScript.cs" />
+    <Compile Include="Assets/Scripts/Platform.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/Resources/SineVFX/PostProcessingV2/Shaders/StdLib.hlsl" />
@@ -151,6 +152,7 @@
     <None Include="Assets/Resources/SineVFX/PostProcessingV2/Shaders/Builtins/CopyStd.shader" />
     <None Include="Assets/Resources/SineVFX/PostProcessingV2/Shaders/Builtins/MotionBlur.shader" />
     <None Include="Assets/Resources/SineVFX/PostProcessingV2/Shaders/Builtins/MultiScaleVODownsample1.compute" />
+    <None Include="Assets/Texture_Me/Shaders/StandardTesselated.shader" />
     <None Include="Assets/Resources/SineVFX/PostProcessingV2/Shaders/Builtins/Fog.hlsl" />
     <None Include="Assets/Resources/SineVFX/PostProcessingV2/Shaders/Builtins/ExposureHistogram.compute" />
     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Masking.shader" />
@@ -169,6 +171,7 @@
     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader" />
     <None Include="Assets/Resources/SineVFX/PostProcessingV2/Shaders/API/Vulkan.hlsl" />
     <None Include="Assets/Resources/SineVFX/PostProcessingV2/Shaders/Colors.hlsl" />
+    <None Include="Assets/Texture_Me/Shaders/Shader Documentation.txt" />
     <None Include="Assets/TextMesh Pro/Shaders/TMP_Sprite.shader" />
   </ItemGroup>
   <ItemGroup>
