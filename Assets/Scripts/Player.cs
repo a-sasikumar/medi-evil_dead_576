@@ -14,7 +14,12 @@ public class Player : MonoBehaviour {
     public float velocity;
     public int num_lives;
     public bool has_won;
-    
+
+    public int maxHealth = 5;
+    public int currentHealth;
+
+    public HealthBar healthbar;
+
     public bool is_dead;
     public GameObject death_text_object;
     public GameObject restart_button;
@@ -35,6 +40,8 @@ public class Player : MonoBehaviour {
 
         is_dead = false;
         has_lost = false;
+        currentHealth = maxHealth;
+        healthbar.SetMaxHealth(maxHealth);
         // death_text_object = GameObject.Find("GameOver");
         // restart_button = GameObject.Find("Restart");
         // success_text = GameObject.Find("Victory");
@@ -154,6 +161,12 @@ public class Player : MonoBehaviour {
             character_controller.Move(movement_direction * velocity * Time.deltaTime);
         }
     }   
+
+    void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        healthbar.SetHealth(currentHealth);
+    }
 
     public void Restart()
     {
