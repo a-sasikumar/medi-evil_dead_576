@@ -553,7 +553,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 0.6, z: 0}
@@ -569,6 +569,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 889925781274c41258b55101ae915451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 3
+  currentHealth: 0
+  healthbar: {fileID: 0}
 --- !u!1 &9214327155691773112
 GameObject:
   m_ObjectHideFlags: 0
