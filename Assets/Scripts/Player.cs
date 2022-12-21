@@ -1,155 +1,161 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
-{
-    [SerializeField]
-    public Transform spwanPoint;
-
-    public bool spawn;
+public class Player : MonoBehaviour {
 
     private Animator animation_controller;
     private CharacterController character_controller;
     public Vector3 movement_direction;
     public float walking_velocity;
-    //public Text text;
+    // public Text text;    
     public float velocity;
     public int num_lives;
     public bool has_won;
-    public int maxHealth = 5;
-    public int currentHealth;
-
-    public HealthBar healthbar;
-    //private GameObject endzone;
-    private float Xorigin;
-    private float Zorigin;
-    private float Height;
+    
+    public bool is_dead;
+    public GameObject death_text_object;
+    public GameObject restart_button;
+    public GameObject success_text;
+    public bool has_lost;
+    
 
     // Use this for initialization
-    void Start()
+    void Start ()
     {
         animation_controller = GetComponent<Animator>();
         character_controller = GetComponent<CharacterController>();
-        movement_direction = new Vector3(1f, 0.0f, 1f);
-        walking_velocity = 1.5f; 
+        movement_direction = new Vector3(0.0f, 0.0f, 0.0f);
+        walking_velocity = 1.5f;
         velocity = 0.0f;
         num_lives = 5;
         has_won = false;
-        spawn = false;
-        currentHealth = maxHealth;
-        healthbar.SetMaxHealth(maxHealth);
-        //endzone = GameObject.FindWithTag("Finish");
-        //Xorigin = transform.position.x;
-        //Zorigin = transform.position.z;
-        //Height = transform.position.y;
-        //// Asking Height
-        //if (Height < 0)
-        //{
-        //    Height += 3;
-        //}
-        character_controller.transform.position = spwanPoint.position;
+
+        is_dead = false;
+        has_lost = false;
+        // death_text_object = GameObject.Find("GameOver");
+        // restart_button = GameObject.Find("Restart");
+        // success_text = GameObject.Find("Victory");
+        // death_text_object.SetActive(false);
+        // restart_button.SetActive(false);
+        // success_text.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //text.text = "Lives left: " + num_lives;
+        // text.text = "Lives left: " + num_lives;
 
-        // Initial State: Idle
-
-        // dummy method to check damage and health bar
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            TakeDamage(1);
+        ////////////////////////////////////////////////
+        // WRITE CODE HERE:
+        // (a) control the animation controller (animator) based on the keyboard input. Adjust also its velocity and moving direction. 
+        // (b) orient (i.e., rotate) your character with left/right arrow [do not change the character's orientation while jumping]
+        // (c) check if the character is out of lives, call the "death" state, let the animation play, and restart the game
+        // (d) check if the character reached the target (display the message "you won", freeze the character (idle state), provide an option to restart the game
+        // feel free to add more fields in the class        
+        ////////////////////////////////////////////////
+        bool isRolling = animation_controller.GetCurrentAnimatorStateInfo(0).IsName("Roll");
+            if(!isRolling) {
+            if(Input.GetKey(KeyCode.UpArrow) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))){
+                animation_controller.SetBool("isIdle", false);   
+                animation_controller.SetBool("isWalking", false);
+                animation_controller.SetBool("isBlocking", false);  
+                animation_controller.SetBool("isAttacking", false);  
+                animation_controller.SetBool("isRunning", true);     
+                animation_controller.SetBool("isRolling", false);
+                velocity += 0.3f;
+                velocity = Mathf.Min(velocity, walking_velocity*2);
+            } else if (Input.GetKey(KeyCode.UpArrow)) {
+                animation_controller.SetBool("isIdle", false);   
+                animation_controller.SetBool("isWalking", true);
+                animation_controller.SetBool("isBlocking", false);  
+                animation_controller.SetBool("isAttacking", false);  
+                animation_controller.SetBool("isRunning", false);   
+                velocity += 0.15f;
+                velocity = Mathf.Min(velocity, walking_velocity);
+            } else {
+                animation_controller.SetBool("isIdle", true);   
+                animation_controller.SetBool("isWalking", false);
+                animation_controller.SetBool("isBlocking", false);  
+                animation_controller.SetBool("isAttacking", false);  
+                animation_controller.SetBool("isRunning", false);     
+                velocity = 0.0f;
+            }
+            if (Input.GetKey(KeyCode.LeftArrow) && !isRolling) {
+                transform.Rotate(new Vector3(0.0f,-0.5f,0.0f));
+            } else if (Input.GetKey(KeyCode.RightArrow) && !isRolling) {
+                transform.Rotate(new Vector3(0.0f,0.5f,0.0f)); 
+            }
+            if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && !isRolling) {
+                animation_controller.SetBool("isAttacking", true);
+            }
+            if ((Input.GetKey(KeyCode.Space)) && !isRolling) {
+                animation_controller.SetBool("isRolling", true);
+            }
+        }
+        if (isRolling) {
+            animation_controller.SetBool("isRolling", false);
+            velocity += 0.45f;
+            velocity = Mathf.Min(velocity, 3*walking_velocity);
         }
 
-        animation_controller.SetInteger("State", 0);
+        if (num_lives <=0 && !is_dead && !has_won) {
+            is_dead = true;
+            animation_controller.SetTrigger("dead");
+            velocity = 0.0f;
+        } 
 
-        // State: Walk
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            animation_controller.SetInteger("State", 1);
-            velocity += 0.5f;
+        if (has_won) {
+            animation_controller.SetBool("isIdle", true);               
+            animation_controller.SetBool("isWalking", false);
+            animation_controller.SetBool("isBackWalking", false);      
+            animation_controller.SetBool("isCrouchForward", false);  
+            animation_controller.SetBool("isCrouchBackward", false);   
+            animation_controller.SetBool("isRunning", false);                                                                                                                             
+            velocity = 0.0f;
+            restart_button.SetActive(true);
+            success_text.SetActive(true);
+        } 
 
-            if (velocity > walking_velocity)
-                velocity = walking_velocity;
+
+        // Show menu after animation has run completely
+        if (animation_controller.GetCurrentAnimatorStateInfo(0).IsName("Death") && 
+            animation_controller.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9 && !has_lost) {
+            has_lost = true;
+            restart_button.SetActive(true);
+            death_text_object.SetActive(true);
         }
 
-        // State: Walk Backwards
-        else if (Input.GetKey(KeyCode.DownArrow))
+        // you don't need to change the code below (yet, it's better if you understand it). Name your FSM states according to the names below (or change both).
+        // do not delete this. It's useful to shift the capsule (used for collision detection) downwards. 
+        // The capsule is also used from turrets to observe, aim and shoot (see Turret.cs)
+        // If the character is crouching, then she evades detection. 
+        bool is_crouching = false;
+        if ( (animation_controller.GetCurrentAnimatorStateInfo(0).IsName("CrouchForward"))
+         ||  (animation_controller.GetCurrentAnimatorStateInfo(0).IsName("CrouchBackward")) )
         {
-            animation_controller.SetInteger("State", 1);
-            velocity -= 0.1f;
-
-            if (velocity > walking_velocity)
-                velocity = walking_velocity;
+            is_crouching = true;
         }
 
-        // State: Attack
-        else if (Input.GetKey(KeyCode.A))
+        if (is_crouching)
         {
-            animation_controller.SetInteger("State", 2);
-            velocity += 0.7f;
-
-            //if (velocity > walking_velocity * 2)
-            //    velocity = walking_velocity * 2;
+            GetComponent<CapsuleCollider>().center = new Vector3(GetComponent<CapsuleCollider>().center.x, 0.0f, GetComponent<CapsuleCollider>().center.z);
         }
-
-        // State: Roll
-        else if (Input.GetKey(KeyCode.S))
-        {
-            animation_controller.SetInteger("State", 3);
-        }
-
-        // State: Block
-        else if (Input.GetKey(KeyCode.B))
-        {
-            animation_controller.SetInteger("State", 4);
-            velocity = 0;
-        }
-
-        // State: Damage (enemy hit)
-        else if (Input.GetKey(KeyCode.Space))
-        {
-            animation_controller.SetInteger("State", 5);
-            velocity += 0.1f;
-        }
-        // Default State: Idle
         else
         {
-            animation_controller.SetInteger("State", 0);
-            velocity = 0;
+            GetComponent<CapsuleCollider>().center = new Vector3(GetComponent<CapsuleCollider>().center.x, 0.9f, GetComponent<CapsuleCollider>().center.z);
         }
-
-
-        // Rotation and orientation
-        if (Input.GetKey(KeyCode.LeftArrow))
-            transform.Rotate(new Vector3(0.0f, -0.5f, 0.0f));
-        if (Input.GetKey(KeyCode.RightArrow))
-            transform.Rotate(new Vector3(0.0f, 0.5f, 0.0f));
 
         // you will use the movement direction and velocity in Turret.cs for deflection shooting 
         float xdirection = Mathf.Sin(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
         float zdirection = Mathf.Cos(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
         movement_direction = new Vector3(xdirection, 0.0f, zdirection);
 
-        // if jump: no rotation ie., xdirection = zdirection
-
-        //transform.position = new Vector3(transform.position.x + speed * xdirection, 0.0f, transform.position.z + speed * zdirection * Time.deltaTime);
-
         // character controller's move function is useful to prevent the character passing through the terrain
         // (changing transform's position does not make these checks)
-
-        //if (transform.position.y < 0)
-        //{
-        //    transform.position = new Vector3(xdirection, Height, zdirection);
-        //}
-
-        if (character_controller.transform.position.y > 0.0f) // if the character starts "climbing" the terrain, drop him down
+        if (transform.position.y > 0.0f) // if the character starts "climbing" the terrain, drop her down
         {
             Vector3 lower_character = movement_direction * velocity * Time.deltaTime;
             lower_character.y = -100f; // hack to force her down
@@ -159,40 +165,15 @@ public class Player : MonoBehaviour
         {
             character_controller.Move(movement_direction * velocity * Time.deltaTime);
         }
+    }   
 
-        if (num_lives < 1)
-        {
-            //text.text = "YOU DIED!";
-            animation_controller.SetTrigger("isDead");
-            velocity = 0;
-            StartCoroutine(Lost());
-        }
-
-        //if (endzone.GetComponent<EndZone>().has_won)
-        //{
-        //    has_won = true;
-        //    text.text = "YOU WON!";
-        //    animation_controller.SetInteger("state", 0);
-        //    velocity = 0;
-        //    StartCoroutine(Won());
-        //}
-    }
-
-    void TakeDamage(int damage)
+    public void Restart()
     {
-        currentHealth -= damage;
-        healthbar.SetHealth(currentHealth);
-    }
-
-    IEnumerator Lost()
-    {
-        yield return new WaitForSeconds(3.5f);
-        SceneManager.LoadScene("PlayAgain");
-    }
-
-    IEnumerator Won()
-    {
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene("YouWon");
-    }
+        death_text_object.SetActive(false);
+        restart_button.SetActive(false);
+        has_lost = false;
+        is_dead = false;
+        num_lives = 5;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }                 
 }
