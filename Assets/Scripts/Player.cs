@@ -84,9 +84,9 @@ public class Player : MonoBehaviour {
                 velocity = 0.0f;
             }
             if (Input.GetKey(KeyCode.LeftArrow) && !isRolling) {
-                transform.Rotate(new Vector3(0.0f,-0.5f,0.0f));
+                transform.Rotate(new Vector3(0.0f,-0.2f,0.0f));
             } else if (Input.GetKey(KeyCode.RightArrow) && !isRolling) {
-                transform.Rotate(new Vector3(0.0f,0.5f,0.0f)); 
+                transform.Rotate(new Vector3(0.0f,0.2f,0.0f)); 
             }
             if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && !isRolling) {
                 animation_controller.SetBool("isAttacking", true);
