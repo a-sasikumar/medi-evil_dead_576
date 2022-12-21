@@ -57,22 +57,12 @@ public class Player : MonoBehaviour {
         // feel free to add more fields in the class        
         ////////////////////////////////////////////////
         bool isRolling = animation_controller.GetCurrentAnimatorStateInfo(0).IsName("Roll");
-            if(!isRolling) {
-            if(Input.GetKey(KeyCode.UpArrow) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))){
-                animation_controller.SetBool("isIdle", false);   
-                animation_controller.SetBool("isWalking", false);
-                animation_controller.SetBool("isBlocking", false);  
-                animation_controller.SetBool("isAttacking", false);  
-                animation_controller.SetBool("isRunning", true);     
-                animation_controller.SetBool("isRolling", false);
-                velocity += 0.3f;
-                velocity = Mathf.Min(velocity, walking_velocity*2);
-            } else if (Input.GetKey(KeyCode.UpArrow)) {
+        if(!isRolling) {
+            if (Input.GetKey(KeyCode.UpArrow)) {
                 animation_controller.SetBool("isIdle", false);   
                 animation_controller.SetBool("isWalking", true);
                 animation_controller.SetBool("isBlocking", false);  
                 animation_controller.SetBool("isAttacking", false);  
-                animation_controller.SetBool("isRunning", false);   
                 velocity += 0.15f;
                 velocity = Mathf.Min(velocity, walking_velocity);
             } else {
@@ -80,13 +70,12 @@ public class Player : MonoBehaviour {
                 animation_controller.SetBool("isWalking", false);
                 animation_controller.SetBool("isBlocking", false);  
                 animation_controller.SetBool("isAttacking", false);  
-                animation_controller.SetBool("isRunning", false);     
                 velocity = 0.0f;
             }
             if (Input.GetKey(KeyCode.LeftArrow) && !isRolling) {
-                transform.Rotate(new Vector3(0.0f,-0.2f,0.0f));
+                transform.Rotate(new Vector3(0.0f,-0.5f,0.0f));
             } else if (Input.GetKey(KeyCode.RightArrow) && !isRolling) {
-                transform.Rotate(new Vector3(0.0f,0.2f,0.0f)); 
+                transform.Rotate(new Vector3(0.0f,0.5f,0.0f)); 
             }
             if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && !isRolling) {
                 animation_controller.SetBool("isAttacking", true);
@@ -113,7 +102,6 @@ public class Player : MonoBehaviour {
             animation_controller.SetBool("isBackWalking", false);      
             animation_controller.SetBool("isCrouchForward", false);  
             animation_controller.SetBool("isCrouchBackward", false);   
-            animation_controller.SetBool("isRunning", false);                                                                                                                             
             velocity = 0.0f;
             restart_button.SetActive(true);
             success_text.SetActive(true);
