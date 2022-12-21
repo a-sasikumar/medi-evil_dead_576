@@ -52,22 +52,28 @@ public class MazeRenderer : MonoBehaviour
                 var cell = maze[i, j];
                 var position = new Vector3(-width / 2 + i, 0, -height / 2 + j);
 
-                if (!(cell.HasFlag(WallState.UP)) && !(cell.HasFlag(WallState.LEFT)) && (!(i == width - 1) && !(cell.HasFlag(WallState.RIGHT)))
-                    && (!(j == 0) && !(cell.HasFlag(WallState.DOWN))))
-                {
-                    int num = Random.Range(1, 5);
-                    if (num > 3)
-                    {
-                        Debug.Log("Hello");
-                        var skeleton = Instantiate(skeletonPrefab, transform) as Transform;
-                        skeleton.position = position + new Vector3(0, 0, size / 10);
-                        skeleton.localScale = new Vector3(size, skeleton.localScale.y, skeleton.localScale.z);
-                    }
+                //if (!(cell.HasFlag(WallState.UP)) && !(cell.HasFlag(WallState.LEFT)) && (!(i == width - 1) && !(cell.HasFlag(WallState.RIGHT)))
+                //    && (!(j == 0) && !(cell.HasFlag(WallState.DOWN))))
+                //{
+                //    int num = Random.Range(1, 5);
+                //    if (num > 3)
+                //    {
+                //        Debug.Log("Hello");
+                //        var skeleton = Instantiate(skeletonPrefab, transform) as Transform;
+                //        skeleton.position = position + new Vector3(0, 0, size / 10);
+                //        skeleton.localScale = new Vector3(size, skeleton.localScale.y, skeleton.localScale.z);
+                //    }
 
-                }
+                //}
 
-                else
+                //else
+                //{
+
+                if (cell.HasFlag(WallState.UP) || cell.HasFlag(WallState.LEFT)
+                    || ((i == width - 1) && (cell.HasFlag(WallState.RIGHT)))
+                    || ((j == 0) && ((cell.HasFlag(WallState.DOWN)))))
                 {
+
                     if (cell.HasFlag(WallState.UP))
                     {
                         var topWall = Instantiate(wallPrefab, transform) as Transform;
@@ -104,6 +110,20 @@ public class MazeRenderer : MonoBehaviour
                         }
                     }
                 }
+
+                else
+                {
+                    int num = Random.Range(1, 6);
+                    if (num >= 3)
+                    {
+                        Debug.Log("Hello");
+                        var skeleton = Instantiate(skeletonPrefab, transform) as Transform;
+                        skeleton.position = position + new Vector3(0, 0, size / 10);
+                        skeleton.localScale = new Vector3(size, skeleton.localScale.y, skeleton.localScale.z);
+                    }
+                }
+
+                //}
 
             }
         }

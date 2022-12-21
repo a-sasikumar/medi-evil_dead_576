@@ -20,6 +20,9 @@ public class Player : MonoBehaviour {
     public GameObject restart_button;
     public GameObject success_text;
     public bool has_lost;
+
+    [SerializeField]
+    public Transform respawnPoint;
     
 
     // Use this for initialization
@@ -35,6 +38,9 @@ public class Player : MonoBehaviour {
 
         is_dead = false;
         has_lost = false;
+
+        respawnPoint.transform.position = new Vector3(0, 0, 0);
+        character_controller.transform.position = respawnPoint.transform.position;
         // death_text_object = GameObject.Find("GameOver");
         // restart_button = GameObject.Find("Restart");
         // success_text = GameObject.Find("Victory");
