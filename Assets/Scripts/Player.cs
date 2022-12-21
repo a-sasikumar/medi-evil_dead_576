@@ -61,6 +61,9 @@ public class Player : MonoBehaviour {
         respawnPoint.transform.position = new Vector3(0, 0, 0);
         character_controller.transform.position = respawnPoint.transform.position;
 
+        // maxHealth = 5;
+        // currentHealth = maxHealth;
+
         healthbar.SetMaxHealth(maxHealth);
         hasPlayed = false;
         // death_text_object = GameObject.Find("GameOver");
@@ -102,9 +105,9 @@ public class Player : MonoBehaviour {
                 velocity = 0.0f;
             }
             if (Input.GetKey(KeyCode.LeftArrow) && !isJumping) {
-                transform.Rotate(new Vector3(0.0f,-0.5f,0.0f));
+                transform.Rotate(new Vector3(0.0f,-1f,0.0f));
             } else if (Input.GetKey(KeyCode.RightArrow) && !isJumping) {
-                transform.Rotate(new Vector3(0.0f,0.5f,0.0f)); 
+                transform.Rotate(new Vector3(0.0f,1f,0.0f)); 
             }
             if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && !isJumping) {
                 animation_controller.SetBool("isAttacking", true);

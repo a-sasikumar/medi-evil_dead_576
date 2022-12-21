@@ -505,7 +505,7 @@ MonoBehaviour:
   num_lives: 0
   has_won: 0
   maxHealth: 5
-  currentHealth: 0
+  currentHealth: 5
   healthbar: {fileID: 126231058}
   is_dead: 0
   death_text_object: {fileID: 0}
