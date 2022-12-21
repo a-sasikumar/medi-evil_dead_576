@@ -26,7 +26,6 @@ using UnityEngine;
 
  	void Start ()
      {
-
          fps_player_obj = GameObject.Find("Player").GetComponent<Player>();
          player_animation_controller = fps_player_obj.GetComponent<Animator>();
          monster_animation_controller = GetComponent<Animator>();
@@ -109,7 +108,7 @@ using UnityEngine;
                      timestamp_attack_landed = Time.time;
                      // monster loses health
                      currentHealth -= 1;
-                     Debug.Log(currentHealth);
+                     //Debug.Log(currentHealth);
                      healthbar.SetHealth(currentHealth);
 
                     fps_player_obj.hasPlayed = false;
@@ -139,7 +138,9 @@ using UnityEngine;
                      // player health decreases
                      fps_player_obj.currentHealth -= 1;
                      fps_player_obj.healthbar.SetHealth(fps_player_obj.currentHealth);
+
                     fps_player_obj.hasPlayed = false;
+
                     if (!fps_player_obj.source.isPlaying && fps_player_obj.hasPlayed == false)
                     {
                         fps_player_obj.source.PlayOneShot(fps_player_obj.playerHurt);

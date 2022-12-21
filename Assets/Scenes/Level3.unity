@@ -272,13 +272,13 @@ MonoBehaviour:
   size: 1
   wallPrefab: {fileID: 6137763805524225783, guid: 70c5f11cb1e994057b7f83f4939db3f5, type: 3}
   floorPrefab: {fileID: 6139707939755710898, guid: 3445979286dab4326b24f28a9a5d6f1d, type: 3}
-  blueGemPrefab: {fileID: 0}
-  goldBarPrefab: {fileID: 0}
-  silverCoinPrefab: {fileID: 0}
-  greenHealthPlusPrefab: {fileID: 0}
-  goldKeyPrefab: {fileID: 0}
-  swordPrefab: {fileID: 0}
-  shieldPrefab: {fileID: 0}
+  blueGemPrefab: {fileID: 3235756685191659600, guid: 78635b88a55e649a7ac4423d8e53ff0b, type: 3}
+  goldBarPrefab: {fileID: 1797593761993770943, guid: c72df05df29f04bf6800423f25d845f7, type: 3}
+  silverCoinPrefab: {fileID: 7579657870572190843, guid: 13c0773484aae448e91aab2e65b84c80, type: 3}
+  greenHealthPlusPrefab: {fileID: 2939346977344168345, guid: 5b83f14303eba43c7b5eb50d8335de61, type: 3}
+  goldKeyPrefab: {fileID: 2534151857719376330, guid: c35fd7d3282924f4bb1469060e1ecbe3, type: 3}
+  swordPrefab: {fileID: 5608883090894994449, guid: 44a62b01584aa4b5bb5dee7220fb7e67, type: 3}
+  shieldPrefab: {fileID: 3294695847078419263, guid: 38f677997b3704d62a4751debd50ecdb, type: 3}
 --- !u!4 &1118959744
 Transform:
   m_ObjectHideFlags: 0
