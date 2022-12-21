@@ -25,7 +25,7 @@ public class Claire : MonoBehaviour {
         movement_direction = new Vector3(0.0f, 0.0f, 0.0f);
         walking_velocity = 1.5f;
         velocity = 0.0f;
-        num_lives = 5;
+        num_lives = 50000;
         has_won = false;
         is_dead = false;
         button = GameObject.Find("Button");
