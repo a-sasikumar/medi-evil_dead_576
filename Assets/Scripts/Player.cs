@@ -15,7 +15,7 @@ public class Player : MonoBehaviour {
     public int num_lives;
     public bool has_won;
 
-    public int maxHealth = 5;
+    public int maxHealth = 100;
     public int currentHealth;
 
     public HealthBar healthbar;
