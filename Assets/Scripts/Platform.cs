@@ -19,8 +19,10 @@ public class Platform : MonoBehaviour
         speed = Random.Range(0.09f, 0.11f);
         sinking = false;
         sinkStart = 0f;
-        if (!name.StartsWith("platform0")) {
+        if (!name.StartsWith("platform0") && !name.StartsWith("platform59")) {
             shouldSink = true;
+        } else {
+            shouldSink = false;
         }
     }
 
@@ -41,8 +43,7 @@ public class Platform : MonoBehaviour
                 }            
             }
         } else {
-            if(shouldSink && Time.time - sinkStart  > 1.5f) {
-                Debug.Log(shouldSink);
+            if(shouldSink && Time.time - sinkStart  > 1f) {
                 transform.position -= Vector3.up * Time.deltaTime * speed * 3;
                 if (y < -4) {
                     Destroy(gameObject);
@@ -56,9 +57,7 @@ public class Platform : MonoBehaviour
     {
         if (collision.gameObject.name == "Player")
         {
-            // if (!level.virus_landed_on_player_recently)
-            //     level.timestamp_virus_landed = Time.time;
-            if(!sinking) {
+            if(shouldSink && !sinking) {
                 sinking = true;
                 sinkStart = Time.time;
             }
