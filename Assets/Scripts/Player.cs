@@ -27,8 +27,8 @@ public class Player : MonoBehaviour
     public GameObject success_text;
     public bool has_lost;
 
-    [SerializeField]
-    public Transform respawnPoint;
+    // [SerializeField]
+    // public Transform respawnPoint;
 
     public bool hasPlayed;
     public AudioClip enemyHurt;
@@ -59,17 +59,23 @@ public class Player : MonoBehaviour
         is_dead = false;
         has_lost = false;
 
-        respawnPoint.transform.position = new Vector3(0, 0, 0);
-        character_controller.transform.position = respawnPoint.transform.position;
+        
+
+        maxHealth = 5;
+        currentHealth = maxHealth;
 
         healthbar.SetMaxHealth(maxHealth);
         hasPlayed = false;
-        // death_text_object = GameObject.Find("GameOver");
-        // restart_button = GameObject.Find("Restart");
+        death_text_object = GameObject.Find("GameOver");
+        restart_button = GameObject.Find("Restart");
         // success_text = GameObject.Find("Victory");
-        // death_text_object.SetActive(false);
-        // restart_button.SetActive(false);
+        death_text_object.SetActive(false);
+        restart_button.SetActive(false);
         // success_text.SetActive(false);
+
+        // respawnPoint.transform.position = new Vector3(0, 0, 0);
+        // character_controller.transform.position = respawnPoint.transform.position;
+
     }
 
     // Update is called once per frame
@@ -155,6 +161,16 @@ public class Player : MonoBehaviour
                 hasPlayed = true;
             }
 
+            death_text_object.SetActive(true);
+            restart_button.SetActive(true);
+            
+
+
+        if (is_dead && transform.position.y < -5) {
+                Destroy(gameObject);
+        }
+        }
+
         }
 
         // TBD
@@ -219,14 +235,5 @@ public class Player : MonoBehaviour
         currentHealth -= damage;
         healthbar.SetHealth(currentHealth);
     }
-
-    public void Restart()
-    {
-        death_text_object.SetActive(false);
-        restart_button.SetActive(false);
-        has_lost = false;
-        is_dead = false;
-        num_lives = 5;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+                 
 }

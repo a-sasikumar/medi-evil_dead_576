@@ -14,7 +14,6 @@ public class Level2 : MonoBehaviour
     void Start()
     {
         GenerateTiles();
-        
     }
 
     void GenerateTiles() {
@@ -41,5 +40,15 @@ public class Level2 : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {   
+        if (collision.gameObject.name == "Player")
+        {
+            Player p = collision.gameObject.GetComponent<Player>();
+            p.currentHealth = 0;
+            GetComponent<MeshCollider>().enabled = false;
+        }
     }
 }
