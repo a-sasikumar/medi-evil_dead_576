@@ -525,6 +525,18 @@ PrefabInstance:
       propertyPath: healthbar
       value: 
       objectReference: {fileID: 6147023097835422175}
+    - target: {fileID: 1476765715, guid: bf0f31ea8511b420c8fc776945e68646, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476765715, guid: bf0f31ea8511b420c8fc776945e68646, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476765715, guid: bf0f31ea8511b420c8fc776945e68646, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.32
+      objectReference: {fileID: 0}
     - target: {fileID: 1670444595357097881, guid: bf0f31ea8511b420c8fc776945e68646, type: 3}
       propertyPath: m_Name
       value: Player

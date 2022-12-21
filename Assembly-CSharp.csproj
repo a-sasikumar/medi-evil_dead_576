@@ -56,20 +56,20 @@
     <Analyzer Include="/Applications/Visual Studio.app/Contents/MonoBundle/Addins/MonoDevelop.Unity/Analyzers/Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets/Scripts/PauseMenu.cs" />
+    <Compile Include="Assets/AurynSky/Gems Ultimate Pack/Scripts/AnimationScript.cs" />
+    <Compile Include="Assets/Scripts/Claire.cs" />
+    <Compile Include="Assets/Resources/FantasyMonstersZolrik/Scene/Script/buttondemo2.cs" />
     <Compile Include="Assets/Scripts/MazeRenderer.cs" />
+    <Compile Include="Assets/Resources/Robo&apos;s turret/Prefabs/Turret.cs" />
     <Compile Include="Assets/Scripts/MazeGenerator.cs" />
+    <Compile Include="Assets/Resources/Apple/Prefab/Apple.cs" />
     <Compile Include="Assets/Resources/Cartoon Heroes/Scripts/SetCharacter/SetCharacter.cs" />
     <Compile Include="Assets/Resources/Lava_Flowing_Shader/Scripts/ScrollingUVs_Layers.cs" />
     <Compile Include="Assets/Scripts/Player.cs" />
-    <Compile Include="Assets/Scripts/Level2.cs" />
     <Compile Include="Assets/Reversed Interactive/The Portal Collection/Scripts/SimpleCameraControllerPortals.cs" />
-    <Compile Include="Assets/AurynSky/Gems Ultimate Pack/Scripts/AnimationScript.cs" />
-    <Compile Include="Assets/Scripts/PauseMenu.cs" />
-    <Compile Include="Assets/Resources/Robo&apos;s turret/Prefabs/Turret.cs" />
-    <Compile Include="Assets/Scripts/Claire.cs" />
-    <Compile Include="Assets/Resources/FantasyMonstersZolrik/Scene/Script/buttondemo2.cs" />
-    <Compile Include="Assets/Resources/Apple/Prefab/Apple.cs" />
     <Compile Include="Assets/Scripts/HealthBar.cs" />
+    <Compile Include="Assets/Scripts/Level2.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TerrainSampleAssets/ThirdPartyNotices.txt" />

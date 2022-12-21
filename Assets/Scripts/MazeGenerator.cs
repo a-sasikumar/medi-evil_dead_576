@@ -30,7 +30,6 @@ public struct Neighbour
 
 public static class MazeGenerator
 {
-
     private static WallState GetOppositeWall(WallState wall)
     {
         switch (wall)

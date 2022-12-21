@@ -57,10 +57,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Plugins/UnitySweeper/Editor/ShaderReferenceCollection.cs" />
-    <Compile Include="Assets/Plugins/UnitySweeper/Editor/CollectionData.cs" />
-    <Compile Include="Assets/Plugins/UnitySweeper/Editor/ClassReferenceCollection.cs" />
-    <Compile Include="Assets/Plugins/UnitySweeper/Editor/FindUnusedAssetsWindow.cs" />
     <Compile Include="Assets/Plugins/UnitySweeper/Editor/AssetCollector.cs" />
+    <Compile Include="Assets/Plugins/UnitySweeper/Editor/CollectionData.cs" />
+    <Compile Include="Assets/Plugins/UnitySweeper/Editor/FindUnusedAssetsWindow.cs" />
+    <Compile Include="Assets/Plugins/UnitySweeper/Editor/ClassReferenceCollection.cs" />
     <Compile Include="Assets/Plugins/UnitySweeper/Editor/AssetReferenceCollection.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 public class MazeRenderer : MonoBehaviour
@@ -26,14 +27,19 @@ public class MazeRenderer : MonoBehaviour
     [SerializeField]
     private Transform diamondPrefab = null;
 
+    [SerializeField]
+    private Transform skeletonPrefab = null;
+
     // Start is called before the first frame update
     void Start()
     {
         var maze = MazeGenerator.Generate(width, height);
-        Draw(maze);
+        int num_gems = 10;
+        int num_enemies = 5;
+        Draw(maze, num_enemies, num_gems);
     }
 
-    private void Draw(WallState[,] maze)
+    private void Draw(WallState[,] maze, int num_enemies, int num_gems)
     {
 
         var floor = Instantiate(floorPrefab, transform);
@@ -46,25 +52,24 @@ public class MazeRenderer : MonoBehaviour
                 var cell = maze[i, j];
                 var position = new Vector3(-width / 2 + i, 0, -height / 2 + j);
 
-                //if (!(cell.HasFlag(WallState.UP)) || !(cell.HasFlag(WallState.LEFT )) || (!(i == width - 1) && !(cell.HasFlag(WallState.RIGHT)))
-                //    || (!(j==0) && !(cell.HasFlag(WallState.DOWN))))
-                //{
-                //    int num = Random.Range(1, 5);
-                //    if (num > 3)
-                //    {
-                //        var diamond = Instantiate(diamondPrefab, transform) as Transform;
-                //        diamond.position = position + new Vector3(0, 0, size / 10);
-                //        diamond.localScale = new Vector3(size, diamond.localScale.y, diamond.localScale.z);
-                //    }
+                if (!(cell.HasFlag(WallState.UP)) && !(cell.HasFlag(WallState.LEFT)) && (!(i == width - 1) && !(cell.HasFlag(WallState.RIGHT)))
+                    && (!(j == 0) && !(cell.HasFlag(WallState.DOWN))))
+                {
+                    int num = Random.Range(1, 5);
+                    if (num > 3)
+                    {
+                        Debug.Log("Hello");
+                        var skeleton = Instantiate(skeletonPrefab, transform) as Transform;
+                        skeleton.position = position + new Vector3(0, 0, size / 10);
+                        skeleton.localScale = new Vector3(size, skeleton.localScale.y, skeleton.localScale.z);
+                    }
 
-                //}
+                }
 
-                //else
-                //{
+                else
+                {
                     if (cell.HasFlag(WallState.UP))
                     {
-
-
                         var topWall = Instantiate(wallPrefab, transform) as Transform;
                         topWall.position = position + new Vector3(0, 0, size / 2);
                         topWall.localScale = new Vector3(size, topWall.localScale.y, topWall.localScale.z);
@@ -98,11 +103,35 @@ public class MazeRenderer : MonoBehaviour
                             bottomWall.localScale = new Vector3(size, bottomWall.localScale.y, bottomWall.localScale.z);
                         }
                     }
-                //}
+                }
 
             }
-
         }
+
+        //bool success = false;
+        //while (!success)
+        //{
+        //    for (int v = 0; v < num_enemies; v++)
+        //    {
+        //        while (true) // try until virus placement is successful (unlikely that there will no places)
+        //        {
+        //            // try a random location in the grid
+        //            int wr = Random.Range(1, width - 1);
+        //            int lr = Random.Range(1, height - 1);
+
+        //            // if grid location is empty/free, place it there
+        //            if (!(maze[wr, lr].HasFlag(WallState.UP)) && !(maze[wr, lr].HasFlag(WallState.LEFT)) &&
+        //                !(maze[wr, lr].HasFlag(WallState.RIGHT)) && !(maze[wr, lr].HasFlag(WallState.DOWN)))
+        //            {
+        //                var skeleton = Instantiate(skeletonPrefab, transform) as Transform;
+        //                skeleton.position = new Vector3(-width / 2 + wr, 0, -height / 2 + lr) + new Vector3(0, 0, -size / 2);
+        //                skeleton.localScale = new Vector3(size, skeleton.localScale.y, skeleton.localScale.z);
+        //                break;
+        //            }
+        //        }
+        //    }
+
+        //}
 
     }
 
