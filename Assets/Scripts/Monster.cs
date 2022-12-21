@@ -20,7 +20,9 @@ using UnityEngine;
      public int maxHealth;
      public int currentHealth;
      private bool monster_attacked_recently;
-     internal float timestamp_attack_landed = float.MaxValue; 
+     internal float timestamp_attack_landed_on_monster = float.MaxValue;
+     private bool player_attacked_recently;
+     internal float timestamp_attack_landed_on_player = float.MaxValue;  
 
      public HealthBar healthbar;
 
@@ -36,6 +38,7 @@ using UnityEngine;
          is_dead = false;
          healthbar.SetMaxHealth(maxHealth);
          monster_attacked_recently = false;
+         player_attacked_recently = false;
      }
 
 
@@ -44,9 +47,14 @@ using UnityEngine;
          if (fps_player_obj.currentHealth < 0.001f) 
              return;
         
-         float time_since_attacked = Time.time - timestamp_attack_landed;
-         if (time_since_attacked > 1.0f) {
+         float time_since_moster_attacked = Time.time - timestamp_attack_landed_on_monster;
+         if (time_since_moster_attacked > 1.0f) {
              monster_attacked_recently = false;
+         }
+
+         float time_since_player_attacked = Time.time - timestamp_attack_landed_on_player;
+         if (time_since_player_attacked > 1.0f) {
+             player_attacked_recently = false;
          }
 
          Vector3 dir_and_dist_from_player = (fps_player_obj.transform.position - transform.position);
@@ -96,7 +104,7 @@ using UnityEngine;
 
      private void Attack()
      {
-         if (!is_dead && !monster_attacked_recently) {
+         if (!is_dead && !monster_attacked_recently && !player_attacked_recently) {
              if (collision.gameObject.name == "Player")
              {
                 //  Debug.Log("collision stay");
@@ -105,10 +113,10 @@ using UnityEngine;
                  if(player_animation_controller.GetCurrentAnimatorStateInfo(0).IsName("Attack")) {
                      Debug.Log("player attacked");
                      monster_attacked_recently = true;
-                     timestamp_attack_landed = Time.time;
+                     timestamp_attack_landed_on_monster = Time.time;
                      // monster loses health
                      currentHealth -= 1;
-                     //Debug.Log(currentHealth);
+                     Debug.Log(currentHealth);
                      healthbar.SetHealth(currentHealth);
 
                     fps_player_obj.hasPlayed = false;
@@ -136,11 +144,11 @@ using UnityEngine;
                  // if monster attacks
                  else {
                      // player health decreases
+                     player_attacked_recently = true;
+                     timestamp_attack_landed_on_player = Time.time;
                      fps_player_obj.currentHealth -= 1;
                      fps_player_obj.healthbar.SetHealth(fps_player_obj.currentHealth);
-
-                    fps_player_obj.hasPlayed = false;
-
+                     fps_player_obj.hasPlayed = false;
                     if (!fps_player_obj.source.isPlaying && fps_player_obj.hasPlayed == false)
                     {
                         fps_player_obj.source.PlayOneShot(fps_player_obj.playerHurt);
@@ -150,19 +158,16 @@ using UnityEngine;
              }
          }
      }
+    // IEnumerator ExampleCoroutine()
+    // {
+    //     //Print the time of when the function is first called.
+    //     Debug.Log("Started Coroutine at timestamp : " + Time.time);
 
-     
+    //     //yield on a new YieldInstruction that waits for 5 seconds.
+    //     yield return new WaitForSecondsRealtime(5);
 
-    IEnumerator ExampleCoroutine()
-    {
-        //Print the time of when the function is first called.
-        Debug.Log("Started Coroutine at timestamp : " + Time.time);
-
-        //yield on a new YieldInstruction that waits for 5 seconds.
-        yield return new WaitForSecondsRealtime(5);
-
-        //After we have waited 5 seconds print the time again.
-        Debug.Log("Finished Coroutine at timestamp : " + Time.time);
-    }
+    //     //After we have waited 5 seconds print the time again.
+    //     Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+    // }
 
  }

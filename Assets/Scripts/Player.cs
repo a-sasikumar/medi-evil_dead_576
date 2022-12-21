@@ -85,22 +85,6 @@ public class Player : MonoBehaviour {
         // feel free to add more fields in the class        
         ////////////////////////////////////////////////
 
-        // player dies
-        if (currentHealth <= 0) {
-            is_dead = true;
-            animation_controller.SetBool("walk", false); 
-            animation_controller.SetBool("attack", false); 
-            animation_controller.SetTrigger("dead");
-
-            hasPlayed = false;
-            if (!source.isPlaying && hasPlayed == false)
-            {
-                source.PlayOneShot(playerHurt);
-                hasPlayed = true;
-            }
-            Destroy(gameObject, 3);
-        }
-
         bool isJumping = animation_controller.GetCurrentAnimatorStateInfo(0).IsName("Jump");
         if(!isJumping) {
             if (Input.GetKey(KeyCode.UpArrow)) {
@@ -140,9 +124,15 @@ public class Player : MonoBehaviour {
             velocity += 0.7f;
             velocity = Mathf.Min(velocity, 4f*walking_velocity);
         }
+        
+        // player dies
 
-        if (num_lives <=0 && !is_dead && !has_won) {
+        if (currentHealth <=0 && !is_dead && !has_won) {
             is_dead = true;
+            animation_controller.SetBool("isIdle", false);   
+            animation_controller.SetBool("isWalking", false);
+            animation_controller.SetBool("isBlocking", false);  
+            animation_controller.SetBool("isAttacking", false); 
             animation_controller.SetTrigger("dead");
             velocity = 0.0f;
 
@@ -152,8 +142,10 @@ public class Player : MonoBehaviour {
                 source.PlayOneShot(playerHurt);
                 hasPlayed = true;
             }
+            
         } 
 
+// TBD
         if (has_won) {
             animation_controller.SetBool("isIdle", true);               
             animation_controller.SetBool("isWalking", false);
