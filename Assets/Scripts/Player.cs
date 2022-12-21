@@ -26,15 +26,29 @@ public class Player : MonoBehaviour {
     public GameObject success_text;
     public bool has_lost;
 
-    // [SerializeField]
-    // public Transform respawnPoint;
-    
+    [SerializeField]
+    public Transform respawnPoint;
+
+    public bool hasPlayed;
+    public AudioClip enemyHurt;
+    public AudioClip gemPickup;
+    public AudioClip nextLevel;
+    public AudioClip playerHurt;
+    public AudioClip swordSwoosh;
+    public AudioClip scaryLaugh;
+
+    //private bool waswater = false;
+    public AudioSource source;
+    //private AudioSource secondarySource;
+
 
     // Use this for initialization
     void Start ()
     {
         animation_controller = GetComponent<Animator>();
         character_controller = GetComponent<CharacterController>();
+        source = character_controller.GetComponent<AudioSource>();
+
         movement_direction = new Vector3(0.0f, 0.0f, 0.0f);
         walking_velocity = 1.5f;
         velocity = 0.0f;
@@ -48,6 +62,7 @@ public class Player : MonoBehaviour {
         character_controller.transform.position = respawnPoint.transform.position;
 
         healthbar.SetMaxHealth(maxHealth);
+        hasPlayed = false;
         // death_text_object = GameObject.Find("GameOver");
         // restart_button = GameObject.Find("Restart");
         // success_text = GameObject.Find("Victory");
@@ -76,6 +91,13 @@ public class Player : MonoBehaviour {
             animation_controller.SetBool("walk", false); 
             animation_controller.SetBool("attack", false); 
             animation_controller.SetTrigger("dead");
+
+            hasPlayed = false;
+            if (!source.isPlaying && hasPlayed == false)
+            {
+                source.PlayOneShot(playerHurt);
+                hasPlayed = true;
+            }
             Destroy(gameObject, 3);
         }
 
@@ -102,6 +124,12 @@ public class Player : MonoBehaviour {
             }
             if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && !isJumping) {
                 animation_controller.SetBool("isAttacking", true);
+                hasPlayed = false;
+                if (!source.isPlaying && hasPlayed == false)
+                {
+                    source.PlayOneShot(swordSwoosh);
+                    hasPlayed = true;
+                }
             }
             if ((Input.GetKey(KeyCode.Space)) && !isJumping) {
                 animation_controller.SetBool("isJumping", true);
@@ -117,6 +145,13 @@ public class Player : MonoBehaviour {
             is_dead = true;
             animation_controller.SetTrigger("dead");
             velocity = 0.0f;
+
+            hasPlayed = false;
+            if (!source.isPlaying && hasPlayed == false)
+            {
+                source.PlayOneShot(playerHurt);
+                hasPlayed = true;
+            }
         } 
 
         if (has_won) {
@@ -126,6 +161,13 @@ public class Player : MonoBehaviour {
             animation_controller.SetBool("isCrouchForward", false);  
             animation_controller.SetBool("isCrouchBackward", false);   
             velocity = 0.0f;
+            hasPlayed = false;
+            if (!source.isPlaying && hasPlayed == false)
+            {
+                source.PlayOneShot(nextLevel);
+                hasPlayed = true;
+            }
+            Destroy(gameObject, 3);
             restart_button.SetActive(true);
             success_text.SetActive(true);
         } 

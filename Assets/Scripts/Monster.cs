@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
- // functionality of virus
- // animates color and size of the virus
- // and attacks the player if the player is near the virus (check the code)
+// functionality of virus
+// animates color and size of the virus
+// and attacks the player if the player is near the virus (check the code)
  public class Monster : MonoBehaviour
- {
+{
      private Player fps_player_obj;
      private Animator player_animation_controller;
      private Animator monster_animation_controller; 
@@ -56,7 +56,14 @@ using UnityEngine;
          if (!is_dead) {
             if (dist_from_player <= attack_dist) {
                 monster_animation_controller.SetBool("walk", false); 
-                monster_animation_controller.SetBool("attack", true); 
+                monster_animation_controller.SetBool("attack", true);
+
+                fps_player_obj.hasPlayed = false;
+                if (!fps_player_obj.source.isPlaying && fps_player_obj.hasPlayed == false)
+                {
+                    fps_player_obj.source.PlayOneShot(fps_player_obj.swordSwoosh);
+                    fps_player_obj.hasPlayed = true;
+                }
             }
             else if (dist_from_player <= radius_of_search_for_player) { 
                 Vector3 dir = dir_and_dist_from_player / dist_from_player;
@@ -103,23 +110,42 @@ using UnityEngine;
                      // monster loses health
                      currentHealth -= 1;
                      Debug.Log(currentHealth);
-                     healthbar.SetHealth(currentHealth); 
+                     healthbar.SetHealth(currentHealth);
+
+                    fps_player_obj.hasPlayed = false;
+                    if (!fps_player_obj.source.isPlaying && fps_player_obj.hasPlayed == false)
+                    {
+                        fps_player_obj.source.PlayOneShot(fps_player_obj.enemyHurt);
+                        fps_player_obj.hasPlayed = true;
+                    }
                     //  StartCoroutine(ExampleCoroutine());
-                     // monster dies
-                     if(currentHealth <= 0) {
+                    // monster dies
+                    if (currentHealth <= 0) {
                         is_dead = true;
                         monster_animation_controller.SetBool("walk", false); 
                         monster_animation_controller.SetBool("attack", false); 
                         monster_animation_controller.SetTrigger("dead");
+                        fps_player_obj.hasPlayed = false;
+                        if (!fps_player_obj.source.isPlaying && fps_player_obj.hasPlayed == false)
+                        {
+                            fps_player_obj.source.PlayOneShot(fps_player_obj.enemyHurt);
+                            fps_player_obj.hasPlayed = true;
+                        }
                         Destroy(gameObject, 3);
                      }
                  } 
                  // if monster attacks
                  else {
                      // player health decreases
-                     // fps_player_obj.currentHealth -= 1;
+                     fps_player_obj.currentHealth -= 1;
                      fps_player_obj.healthbar.SetHealth(fps_player_obj.currentHealth);
-                 }
+                    fps_player_obj.hasPlayed = false;
+                    if (!fps_player_obj.source.isPlaying && fps_player_obj.hasPlayed == false)
+                    {
+                        fps_player_obj.source.PlayOneShot(fps_player_obj.playerHurt);
+                        fps_player_obj.hasPlayed = true;
+                    }
+                }
              }
          }
      }
