@@ -157,6 +157,7 @@ public class Player : MonoBehaviour {
         if (is_dead && transform.position.y < -5) {
                 Destroy(gameObject);
         }
+        }
 
 // TBD
         if (has_won) {
@@ -215,14 +216,5 @@ public class Player : MonoBehaviour {
         currentHealth -= damage;
         healthbar.SetHealth(currentHealth);
     }
-
-    public void Restart()
-    {
-        death_text_object.SetActive(false);
-        restart_button.SetActive(false);
-        has_lost = false;
-        is_dead = false;
-        num_lives = 5;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }                 
+                 
 }
