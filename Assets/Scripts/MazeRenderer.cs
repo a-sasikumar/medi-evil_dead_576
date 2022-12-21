@@ -52,8 +52,9 @@ public class MazeRenderer : MonoBehaviour
     private Transform shieldPrefab = null;
 
 
-    private (int x, int y)[] validLocs = new (int x, int y)[10];
-
+    //private (int x, int y)[] validLocs = new (int x, int y)[10];
+    public List<int> validLocs = new List<int>();
+    public List<int> validLocsActual = new List<int>();
     // Start is called before the first frame update
     void Start()
     {
@@ -122,58 +123,61 @@ public class MazeRenderer : MonoBehaviour
 
                 else
                 {
-
-                    validLocs.Append((i, j));
+                    validLocs.Add(i);
+                    validLocs.Add(j);
+                    //Debug.Log(i);
+                    //Debug.Log(j);
                 }
-
             }
         }
-        
-        //Debug.Log(validLocs.Length);
-        int index = Random.Range(0, validLocs.Length);
-        (int x, int y) pos = validLocs[index];
-        //Debug.Log(pos);
 
-        var validPosition = new Vector3(-width / 2 + validLocs[index].x, 0, -height / 2 + validLocs[index].y);
+        validLocs.Reverse();
+        //for (int a = 0; a < validLocs.Count; a++)
+        //{
+        //    Debug.Log(validLocs[a]);
+        //}
+        int k = 0;
+
+        var validPosition = new Vector3(-width / 2 + validLocs[k], 0, -height / 2 + validLocs[k+1]);
         var BlueGemPrefab = Instantiate(blueGemPrefab, transform) as Transform;
-        BlueGemPrefab.position = validPosition + new Vector3(0, 0, -size / 2);
-        BlueGemPrefab.localScale = new Vector3(size, BlueGemPrefab.localScale.y, BlueGemPrefab.localScale.z);
+        BlueGemPrefab.position = validPosition + new Vector3(0, 0.5f, -size / 2);
+        BlueGemPrefab.localScale = new Vector3(size/2, BlueGemPrefab.localScale.y/2, BlueGemPrefab.localScale.z/2);
 
-        int index1 = Random.Range(0, validLocs.Length);
-        validPosition = new Vector3(-width / 2 + validLocs[index1].x, 0, -height / 2 + validLocs[index1].y);
+
+        validPosition = new Vector3(-width / 2 + validLocs[k+2], 0, -height / 2 + validLocs[k+3]);
         var GoldBarPrefab = Instantiate(goldBarPrefab, transform) as Transform;
-        GoldBarPrefab.position = validPosition + new Vector3(0, 0, -size / 2);
-        GoldBarPrefab.localScale = new Vector3(size, GoldBarPrefab.localScale.y, GoldBarPrefab.localScale.z);
+        GoldBarPrefab.position = validPosition + new Vector3(0, 0.5f, -size / 2);
+        GoldBarPrefab.localScale = new Vector3(size/2, GoldBarPrefab.localScale.y/2, GoldBarPrefab.localScale.z/2);
 
-        int index2 = Random.Range(0, validLocs.Length);
-        validPosition = new Vector3(-width / 2 + validLocs[index2].x, 0, -height / 2 + validLocs[index2].y);
+
+        validPosition = new Vector3(-width / 2 + validLocs[k+4], 0, -height / 2 + validLocs[k+5]);
         var SilverCoinPrefab = Instantiate(silverCoinPrefab, transform) as Transform;
-        SilverCoinPrefab.position = validPosition + new Vector3(0, 0, -size / 2);
-        SilverCoinPrefab.localScale = new Vector3(size, SilverCoinPrefab.localScale.y, SilverCoinPrefab.localScale.z);
+        SilverCoinPrefab.position = validPosition + new Vector3(0, 0.5f, -size / 2);
+        SilverCoinPrefab.localScale = new Vector3(size/2, SilverCoinPrefab.localScale.y/2, SilverCoinPrefab.localScale.z/2);
 
-        int index3 = Random.Range(0, validLocs.Length);
-        validPosition = new Vector3(-width / 2 + validLocs[index3].x, 0, -height / 2 + validLocs[index3].y);
+
+        validPosition = new Vector3(-width / 2 + validLocs[k+6], 0, -height / 2 + validLocs[k+7]);
         var GreenHealthPlusPrefab = Instantiate(greenHealthPlusPrefab, transform) as Transform;
-        GreenHealthPlusPrefab.position = validPosition + new Vector3(0, 0, -size / 2);
-        GreenHealthPlusPrefab.localScale = new Vector3(size, GreenHealthPlusPrefab.localScale.y, GreenHealthPlusPrefab.localScale.z);
+        GreenHealthPlusPrefab.position = validPosition + new Vector3(0, 0.5f, -size / 2);
+        GreenHealthPlusPrefab.localScale = new Vector3(size/2, GreenHealthPlusPrefab.localScale.y/2, GreenHealthPlusPrefab.localScale.z/2);
 
-        int index4 = Random.Range(0, validLocs.Length);
-        validPosition = new Vector3(-width / 2 + validLocs[index4].x, 0, -height / 2 + validLocs[index4].y);
+
+        validPosition = new Vector3(-width / 2 + validLocs[k+8], 0, -height / 2 + validLocs[k+9]);
         var GoldKeyPrefab = Instantiate(goldKeyPrefab, transform) as Transform;
-        GoldKeyPrefab.position = validPosition + new Vector3(0, 0, -size / 2);
-        GoldKeyPrefab.localScale = new Vector3(size, GoldKeyPrefab.localScale.y, GoldKeyPrefab.localScale.z);
+        GoldKeyPrefab.position = validPosition + new Vector3(0, 0.5f, -size / 2);
+        GoldKeyPrefab.localScale = new Vector3(size/2, GoldKeyPrefab.localScale.y/2, GoldKeyPrefab.localScale.z/2);
 
-        int index5 = Random.Range(0, validLocs.Length);
-        validPosition = new Vector3(-width / 2 + validLocs[index5].x, 0, -height / 2 + validLocs[index5].y);
+
+        validPosition = new Vector3(-width / 2 + validLocs[k+10], 0, -height / 2 + validLocs[k+11]);
         var SwordPrefab = Instantiate(swordPrefab, transform) as Transform;
-        SwordPrefab.position = validPosition + new Vector3(0, 0, -size / 2);
-        SwordPrefab.localScale = new Vector3(size, SwordPrefab.localScale.y, SwordPrefab.localScale.z);
+        SwordPrefab.position = validPosition + new Vector3(0, 0.5f, -size / 2);
+        SwordPrefab.localScale = new Vector3(size/2, SwordPrefab.localScale.y/2, SwordPrefab.localScale.z/2);
+    
 
-        int index6 = Random.Range(0, validLocs.Length);
-        validPosition = new Vector3(-width / 2 + validLocs[index6].x, 0, -height / 2 + validLocs[index6].y);
+        validPosition = new Vector3(-width / 2 + validLocs[k+12], 0, -height / 2 + validLocs[k+13]);
         var ShieldPrefab = Instantiate(shieldPrefab, transform) as Transform;
-        ShieldPrefab.position = validPosition + new Vector3(0, 0, -size / 2);
-        ShieldPrefab.localScale = new Vector3(size, ShieldPrefab.localScale.y, ShieldPrefab.localScale.z);
+        ShieldPrefab.position = validPosition + new Vector3(0, 0.5f, -size / 2);
+        ShieldPrefab.localScale = new Vector3(size/2, ShieldPrefab.localScale.y/2, ShieldPrefab.localScale.z/2);
 
     }
 

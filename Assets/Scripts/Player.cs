@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
 
     private Animator animation_controller;
     private CharacterController character_controller;
@@ -43,7 +44,7 @@ public class Player : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         animation_controller = GetComponent<Animator>();
         character_controller = GetComponent<CharacterController>();
@@ -86,27 +87,35 @@ public class Player : MonoBehaviour {
         ////////////////////////////////////////////////
 
         bool isJumping = animation_controller.GetCurrentAnimatorStateInfo(0).IsName("Jump");
-        if(!isJumping) {
-            if (Input.GetKey(KeyCode.UpArrow)) {
-                animation_controller.SetBool("isIdle", false);   
+        if (!isJumping)
+        {
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                animation_controller.SetBool("isIdle", false);
                 animation_controller.SetBool("isWalking", true);
-                animation_controller.SetBool("isBlocking", false);  
-                animation_controller.SetBool("isAttacking", false);  
+                animation_controller.SetBool("isBlocking", false);
+                animation_controller.SetBool("isAttacking", false);
                 velocity += 0.15f;
                 velocity = Mathf.Min(velocity, walking_velocity);
-            } else {
-                animation_controller.SetBool("isIdle", true);   
+            }
+            else
+            {
+                animation_controller.SetBool("isIdle", true);
                 animation_controller.SetBool("isWalking", false);
-                animation_controller.SetBool("isBlocking", false);  
-                animation_controller.SetBool("isAttacking", false);  
+                animation_controller.SetBool("isBlocking", false);
+                animation_controller.SetBool("isAttacking", false);
                 velocity = 0.0f;
             }
-            if (Input.GetKey(KeyCode.LeftArrow) && !isJumping) {
-                transform.Rotate(new Vector3(0.0f,-0.5f,0.0f));
-            } else if (Input.GetKey(KeyCode.RightArrow) && !isJumping) {
-                transform.Rotate(new Vector3(0.0f,0.5f,0.0f)); 
+            if (Input.GetKey(KeyCode.LeftArrow) && !isJumping)
+            {
+                transform.Rotate(new Vector3(0.0f, -0.5f, 0.0f));
             }
-            if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && !isJumping) {
+            else if (Input.GetKey(KeyCode.RightArrow) && !isJumping)
+            {
+                transform.Rotate(new Vector3(0.0f, 0.5f, 0.0f));
+            }
+            if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && !isJumping)
+            {
                 animation_controller.SetBool("isAttacking", true);
                 hasPlayed = false;
                 if (!source.isPlaying && hasPlayed == false)
@@ -115,24 +124,27 @@ public class Player : MonoBehaviour {
                     hasPlayed = true;
                 }
             }
-            if ((Input.GetKey(KeyCode.Space)) && !isJumping) {
+            if ((Input.GetKey(KeyCode.Space)) && !isJumping)
+            {
                 animation_controller.SetBool("isJumping", true);
             }
         }
-        if (isJumping) {
+        if (isJumping)
+        {
             animation_controller.SetBool("isJumping", false);
             velocity += 0.7f;
-            velocity = Mathf.Min(velocity, 4f*walking_velocity);
+            velocity = Mathf.Min(velocity, 4f * walking_velocity);
         }
-        
+
         // player dies
 
-        if (currentHealth <=0 && !is_dead && !has_won) {
+        if (currentHealth <= 0 && !is_dead && !has_won)
+        {
             is_dead = true;
-            animation_controller.SetBool("isIdle", false);   
+            animation_controller.SetBool("isIdle", false);
             animation_controller.SetBool("isWalking", false);
-            animation_controller.SetBool("isBlocking", false);  
-            animation_controller.SetBool("isAttacking", false); 
+            animation_controller.SetBool("isBlocking", false);
+            animation_controller.SetBool("isAttacking", false);
             animation_controller.SetTrigger("dead");
             velocity = 0.0f;
 
@@ -142,16 +154,17 @@ public class Player : MonoBehaviour {
                 source.PlayOneShot(playerHurt);
                 hasPlayed = true;
             }
-            
-        } 
 
-// TBD
-        if (has_won) {
-            animation_controller.SetBool("isIdle", true);               
+        }
+
+        // TBD
+        if (has_won)
+        {
+            animation_controller.SetBool("isIdle", true);
             animation_controller.SetBool("isWalking", false);
-            animation_controller.SetBool("isBackWalking", false);      
-            animation_controller.SetBool("isCrouchForward", false);  
-            animation_controller.SetBool("isCrouchBackward", false);   
+            animation_controller.SetBool("isBackWalking", false);
+            animation_controller.SetBool("isCrouchForward", false);
+            animation_controller.SetBool("isCrouchBackward", false);
             velocity = 0.0f;
             hasPlayed = false;
             if (!source.isPlaying && hasPlayed == false)
@@ -162,12 +175,13 @@ public class Player : MonoBehaviour {
             Destroy(gameObject, 3);
             restart_button.SetActive(true);
             success_text.SetActive(true);
-        } 
+        }
 
 
         // Show menu after animation has run completely
-        if (animation_controller.GetCurrentAnimatorStateInfo(0).IsName("Death") && 
-            animation_controller.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9 && !has_lost) {
+        if (animation_controller.GetCurrentAnimatorStateInfo(0).IsName("Death") &&
+            animation_controller.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9 && !has_lost)
+        {
             has_lost = true;
             restart_button.SetActive(true);
             death_text_object.SetActive(true);
@@ -176,9 +190,12 @@ public class Player : MonoBehaviour {
         float xdirection = Mathf.Sin(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
         float zdirection = Mathf.Cos(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
         float ydirection;
-        if(isJumping) {
+        if (isJumping)
+        {
             ydirection = 0.7f;
-        } else {
+        }
+        else
+        {
             ydirection = 0.0f;
         }
         movement_direction = new Vector3(xdirection, ydirection, zdirection);
@@ -195,7 +212,7 @@ public class Player : MonoBehaviour {
         // {
         character_controller.Move(movement_direction * velocity * Time.deltaTime);
         // }
-    }   
+    }
 
     void TakeDamage(int damage)
     {
@@ -211,5 +228,5 @@ public class Player : MonoBehaviour {
         is_dead = false;
         num_lives = 5;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }                 
+    }
 }
