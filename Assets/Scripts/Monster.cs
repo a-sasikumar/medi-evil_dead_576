@@ -92,12 +92,12 @@ public class Monster : MonoBehaviour
                     monster_animation_controller.SetBool("walk", false); 
                     monster_animation_controller.SetBool("attack", false); 
                     monster_animation_controller.SetTrigger("dead");
-                    Destroy(gameObject, 4);
+                    Destroy(gameObject);
                 } 
                 // if monster attacks
                 else {
                     // player health decreases
-                    // fps_player_obj.currentHealth -= 1;
+                    fps_player_obj.currentHealth -= 1;
                     fps_player_obj.healthbar.SetHealth(fps_player_obj.currentHealth);
                 }
             }

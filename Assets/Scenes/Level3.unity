@@ -252,7 +252,7 @@ MonoBehaviour:
   wallPrefab: {fileID: 6137763805524225783, guid: 70c5f11cb1e994057b7f83f4939db3f5, type: 3}
   floorPrefab: {fileID: 6139707939755710898, guid: 3445979286dab4326b24f28a9a5d6f1d, type: 3}
   diamondPrefab: {fileID: 9116045103529712328, guid: c6e2c2302e6a34277a15053da98470d4, type: 3}
-  skeletonPrefab: {fileID: 6782667309670242428, guid: 6e4019dcbde26c8408f888128d0a9a67, type: 3}
+  skeletonPrefab: {fileID: 4811506403594268223, guid: eacc0cb8f6ca54c04b6580a47c892262, type: 3}
 --- !u!4 &1118959744
 Transform:
   m_ObjectHideFlags: 0
@@ -293,11 +293,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1476765715, guid: bf0f31ea8511b420c8fc776945e68646, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.7
+      value: 1.9
       objectReference: {fileID: 0}
     - target: {fileID: 1476765715, guid: bf0f31ea8511b420c8fc776945e68646, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.3
+      value: -3.4
       objectReference: {fileID: 0}
     - target: {fileID: 1476765715, guid: bf0f31ea8511b420c8fc776945e68646, type: 3}
       propertyPath: m_LocalRotation.w
@@ -423,6 +423,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7887456134335323380, guid: 430506237e7334b92844e29ee9ad3148, type: 3}
+      propertyPath: m_Value
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887456134335323380, guid: 430506237e7334b92844e29ee9ad3148, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7887456135761453512, guid: 430506237e7334b92844e29ee9ad3148, type: 3}
       propertyPath: m_Pivot.x
       value: 0

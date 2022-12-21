@@ -69,6 +69,7 @@
     <Compile Include="Assets/Resources/Reversed Interactive/The Portal Collection/Scripts/SimpleCameraControllerPortals.cs" />
     <Compile Include="Assets/Scripts/HealthBar.cs" />
     <Compile Include="Assets/Scripts/Level2.cs" />
+    <Compile Include="Assets/Scripts/Monster.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/Resources/SineVFX/PostProcessingV2/Shaders/StdLib.hlsl" />
