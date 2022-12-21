@@ -26,8 +26,8 @@ public class Player : MonoBehaviour {
     public GameObject success_text;
     public bool has_lost;
 
-    [SerializeField]
-    public Transform respawnPoint;
+    // [SerializeField]
+    // public Transform respawnPoint;
     
 
     // Use this for initialization
@@ -44,8 +44,8 @@ public class Player : MonoBehaviour {
         is_dead = false;
         has_lost = false;
 
-        respawnPoint.transform.position = new Vector3(0, 0, 0);
-        character_controller.transform.position = respawnPoint.transform.position;
+        // respawnPoint.transform.position = new Vector3(0, 0, 0);
+        // character_controller.transform.position = respawnPoint.transform.position;
         currentHealth = maxHealth;
         healthbar.SetMaxHealth(maxHealth);
         // death_text_object = GameObject.Find("GameOver");
@@ -100,7 +100,7 @@ public class Player : MonoBehaviour {
         if (isJumping) {
             animation_controller.SetBool("isJumping", false);
             velocity += 0.7f;
-            velocity = Mathf.Min(velocity, 3f*walking_velocity);
+            velocity = Mathf.Min(velocity, 4f*walking_velocity);
         }
 
         if (num_lives <=0 && !is_dead && !has_won) {
