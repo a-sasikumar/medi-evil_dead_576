@@ -42,7 +42,6 @@ public class Level2Question : MonoBehaviour
            var dialogTexts = new List<DialogData>();
            dialogTexts.Add (new DialogData ("Unfortunately you need to try again."));
            dialogManager.Show(dialogTexts);
-           SceneManager.LoadScene("EndScene");
         }
     }
 
@@ -51,6 +50,7 @@ public class Level2Question : MonoBehaviour
            var dialogTexts = new List<DialogData>();
            dialogTexts.Add(new DialogData ("Congratulations."));
            dialogManager.Show(dialogTexts);
+          SceneManager.LoadScene("EndScene");
         } else {
            var dialogTexts = new List<DialogData>();
            dialogTexts.Add (new DialogData ("Unfortunately you need to try again."));
